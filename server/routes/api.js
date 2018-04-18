@@ -52,7 +52,6 @@ router.get('/users', (req, res) =>
                 sendError(err, res);
             });
 	});
-	/*res.send('Hello World!');*/
 });
 
 module.exports = router;
