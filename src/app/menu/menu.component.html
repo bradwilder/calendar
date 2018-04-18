@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 fixed-top menu">
+	<div class="container">
+		<!--<h1 class="navbar-brand header__brand">
+			<span class="header__brand-name type__desc">Calendar</span>
+		</h1>-->
+		<span class="navbar-brand type__desc">Calendar</span>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="navbar-collapse">
+			<ul class="navbar-nav ml-auto header__nav type__title type__title--darker">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="editDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-pencil"></i> Edit <span class="caret"></span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="editDropdown">
+						<a class="dropdown-item" href="#" data-modal="">Event Types</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="modeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-eye"></i> <span id="view-label"></span> <span class="caret"></span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="modeDropdown">
+						<a class="dropdown-item" id="month-trigger" href="#">Month</a>
+						<a class="dropdown-item" id="year-trigger" href="#">Year</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

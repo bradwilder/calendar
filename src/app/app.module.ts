@@ -4,10 +4,12 @@ import { AppComponent } from './app.component';
 
 import { HttpModule } from '@angular/http';
 import { DataService } from './data.service';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
