@@ -1,0 +1,41 @@
+.cal-year {
+	height: 100%;
+	
+	&__container {
+		display: flex;
+		flex-flow: column;
+		height: 100%;
+	}
+	
+	&__controls {
+		flex: 0 1 auto;
+	}
+	
+	&__row {
+		flex: 0 1 auto;
+		overflow-y: auto;
+		margin-top: 10px;
+	}
+	
+	&__title {
+		text-align: center;
+		font-weight: bold;
+	}
+	
+	&__table {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+	@media (min-width:768px) and (max-width:1199px) {
+		& .col-sm-6:nth-child(2n+1) {
+			clear:left;
+		}
+	}
+	
+	@media (min-width:1200px) {
+		& .col-lg-4:nth-child(3n+1) {
+			clear:left;
+		}
+	}
+}

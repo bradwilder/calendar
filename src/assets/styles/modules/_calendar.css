@@ -1,0 +1,181 @@
+.cal {
+	margin: 0 auto;
+	padding-top: 3em;
+	padding-bottom: 3em;
+	max-width: 100%;
+	font-family: 'Droid Sans Mono';
+	font-size: 14px;
+	
+	@mixin atMedium {
+		max-width: 80%;
+	}
+	
+	@mixin atExLarge {
+		max-width: 60%;
+	}
+	
+	& .clndr {
+		height: 100%;
+		
+		& .clndr-controls {
+			display: inline-block;
+			width: 100%;
+			position: relative;
+			
+			& .clndr-control-title {
+				float: left;
+				width: 34%;
+				text-align: center;
+			}
+			
+			& .clndr-control-button {
+				float: left;
+				width: 33%;
+				
+				&.rightalign {
+					text-align: right;
+				}
+				
+				& .clndr-next-button,
+				& .clndr-previous-button {
+					cursor: pointer;
+					user-select: none;
+					
+					&:hover {
+						background: #ddd;
+					}
+					
+					&.inactive {
+						opacity: 0.5;
+						
+						&:hover {
+							background: none;
+							cursor: default;
+						}
+					}
+				}
+			}
+		}
+		
+		& .clndr-block {
+			margin-top: 10px;
+		}
+		
+		& .clndr-table {
+			table-layout: fixed;
+			border-collapse: collapse;
+			width: 100%;
+			
+			& th,
+			& td {
+				border: 1px solid #ccc;
+			}
+			
+			& .header-days {
+				height: 30px;
+				font-size: 0.78571429em;
+				background: #0D70A6;
+				
+				& .header-day {
+					vertical-align: middle;
+					text-align: center;
+					color: seashell;
+				}
+			}
+			
+			& .table-days {
+				height: 120px;
+				
+				&--short {
+					height: 55px !important;
+				}
+				
+				& td {
+					vertical-align: top;
+					width: 100%;
+					height: inherit;
+				}
+				
+				& .day {
+					background: #F6F7F9;
+					position: relative;
+					
+					&:hover {
+						background: #eee;
+					}
+					
+					&.today {
+						background: #9AD6E3;
+						
+						&:hover {
+							background: #72c6d8;
+						}
+					}
+					
+					&.inactive {
+						background: #ddd;
+					}
+					
+					&.selected {
+						outline: 1px dashed #000;
+					}
+					
+					&.empty,
+					&.adjacent-month {
+						background: #ddd;
+						
+						&:hover {
+							background: #ccc;
+						}
+					}
+					
+					& .day-contents {
+						max-height: 40px;
+						padding: 8px;
+						font-size: 0.85714286em;
+						text-align: right;
+					}
+					
+					& .day-icons {
+						max-height: 80px;
+						overflow: auto;
+						padding: 0 5px;
+						
+						&--center {
+							text-align: center;
+						}
+						
+						& .day-icon {
+							height: 1.5em;
+							width: 1.5em;
+							
+							&--small {
+								height: .4em !important;
+								width: .4em !important;
+							}
+						}
+					}
+					
+					& .day-event-btn {
+						position: absolute;
+						top: .65em;
+						left: 5px;
+						display: none;
+						pointer-events: none;
+						cursor: auto;
+					}
+					
+					&.selected .day-event-btn {
+						display: block;
+						pointer-events: auto;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+	
+	&__container {
+		height: 100%;
+	}
+}

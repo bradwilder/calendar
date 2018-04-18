@@ -1,0 +1,34 @@
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	color: #666;
+	background-color: #EEEFF3;
+	font-size: 10px;
+	height: 100%;
+}
+
+.body-with-header {
+	padding-top: 5em; /* Account for the header */
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+	color: #666;
+	text-decoration: none;
+	outline: none;
+	border: 0;
+}
+
+textarea {
+	resize: vertical;
+	width: 100%;
+}
