@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { DataService } from './data.service';
 import { MenuComponent } from './menu/menu.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
