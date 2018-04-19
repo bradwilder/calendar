@@ -13,10 +13,21 @@ gulp.task('watch', ['build'], function()
     watch('./src/app/**/*', function()
     {
 		gulp.start('browserRefresh');
-    });
+	});
+	
+	watch('./src/styles/**/*', function()
+    {
+		gulp.start('cssInject');
+	});
 });
 
 gulp.task('browserRefresh', ['build'], function()
 {
 	browserSync.reload();
+});
+
+gulp.task('cssInject', ['build'], function()
+{
+	return gulp.src(['./dist/*.js', './dist/*.js.map'])
+		.pipe(browserSync.stream());
 });
