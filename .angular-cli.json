@@ -1,13 +1,16 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
+  "project":
+  {
     "name": "calendar2.0"
   },
-  "apps": [
+  "apps":
+  [
     {
       "root": "src",
       "outDir": "dist",
-      "assets": [
+      "assets":
+      [
         "assets",
         "favicon.ico"
       ],
@@ -18,25 +21,37 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": [
+      "styles":
+      [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "./styles/styles.scss"
       ],
-      "scripts": [],
+      "scripts":
+      [
+        "../bower_components/jquery/dist/jquery.min.js",
+        "../bower_components/moment/min/moment.min.js",
+        "../bower_components/clndr/src/clndr.js",
+        "../bower_components/angular/angular.min.js",
+        "../bower_components/angular-clndr/angular-clndr.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
-      "environments": {
+      "environments":
+      {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
   ],
-  "e2e": {
-    "protractor": {
+  "e2e":
+  {
+    "protractor":
+    {
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [
+  "lint":
+  [
     {
       "project": "src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
@@ -50,12 +65,15 @@
       "exclude": "**/node_modules/**"
     }
   ],
-  "test": {
-    "karma": {
+  "test":
+  {
+    "karma":
+    {
       "config": "./karma.conf.js"
     }
   },
-  "defaults": {
+  "defaults":
+  {
     "styleExt": "css",
     "component": {}
   }
