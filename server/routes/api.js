@@ -34,17 +34,17 @@ let response =
     message: null
 };
 
-// Get users
-router.get('/users', (req, res) =>
+// Get events
+router.get('/events', (req, res) =>
 {
 	connection((db) =>
 	{
-        db.collection('users')
+        db.collection('events')
             .find()
             .toArray()
-			.then((users) =>
+			.then((events) =>
 			{
-                response.data = users;
+                response.data = events;
                 res.json(response);
             })
 			.catch((err) =>
