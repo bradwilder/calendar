@@ -29,11 +29,9 @@
       ],
       "scripts":
       [
-        "../bower_components/jquery/dist/jquery.min.js",
+		"../bower_components/jquery/dist/jquery.min.js",
         "../bower_components/moment/min/moment.min.js",
-        "../bower_components/clndr/clndr.min.js",
-        "../bower_components/angular/angular.min.js",
-        "../bower_components/angular-clndr/angular-clndr.min.js"
+        "../bower_components/clndr/clndr.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments":
