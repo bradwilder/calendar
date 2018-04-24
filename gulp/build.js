@@ -9,3 +9,12 @@ gulp.task('build', function(cb)
 		cb(err);
 	});
 });
+
+gulp.task('ngWatch', function(cb)
+{
+	exec('ng serve --proxy-config proxy.conf.json', function (err, stdout, stderr)
+	{
+		console.log(stdout);
+		cb(err);
+	});
+});
