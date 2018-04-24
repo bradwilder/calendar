@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-year-calendar',
-  templateUrl: './year-calendar.component.html',
-  styleUrls: ['./year-calendar.component.css']
+declare var $: any;
+
+@Component
+({
+	selector: 'app-year-calendar',
+	templateUrl: './year-calendar.component.html',
+	styleUrls: ['./year-calendar.component.css']
 })
-export class YearCalendarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class YearCalendarComponent implements OnInit
+{
+	@Input() options: Object;
+	clndr;
+	
+	constructor() {}
+	
+	ngOnInit()
+	{
+		this.clndr = $('#cal-year').clndr(this.options);
+	}
 }

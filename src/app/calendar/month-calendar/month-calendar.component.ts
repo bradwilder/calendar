@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-month-calendar',
-  templateUrl: './month-calendar.component.html',
-  styleUrls: ['./month-calendar.component.css']
+declare var $: any;
+
+@Component
+({
+	selector: 'app-month-calendar',
+	templateUrl: './month-calendar.component.html',
+	styleUrls: ['./month-calendar.component.css']
 })
-export class MonthCalendarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class MonthCalendarComponent implements OnInit
+{
+	@Input() options: Object;
+	clndr;
+	
+	constructor() {}
+	
+	ngOnInit()
+	{
+		this.clndr = $('#cal-month').clndr(this.options);
+	}
 }
