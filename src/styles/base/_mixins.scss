@@ -1,33 +1,33 @@
-@define-mixin atSmall {
+@mixin atSmall {
 	@media (min-width: 576px)
 	{
-		@mixin-content;
+		@content;
 	}
 }
 
-@define-mixin atMedium {
+@mixin atMedium {
 	@media (min-width: 768px)
 	{
-		@mixin-content;
+		@content;
 	}
 }
 
-@define-mixin atLarge {
+@mixin atLarge {
 	@media (min-width: 992px)
 	{
-		@mixin-content;
+		@content;
 	}
 }
 
-@define-mixin atExLarge {
-	@media (min-width: 1400px)
+@mixin atExLarge {
+	@media (min-width: 1200px)
 	{
-		@mixin-content;
+		@content;
 	}
 }
 
 /* More elegant way to clear float */
-@define-mixin clearfix {
+@mixin clearfix {
 	&::after {
 		content: "";
 		clear: both;

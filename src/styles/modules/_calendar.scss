@@ -6,11 +6,11 @@
 	font-family: 'Droid Sans Mono';
 	font-size: 14px;
 	
-	@mixin atMedium {
+	@include atMedium {
 		max-width: 80%;
 	}
 	
-	@mixin atExLarge {
+	@include atExLarge {
 		max-width: 60%;
 	}
 	
