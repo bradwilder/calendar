@@ -1,6 +1,10 @@
 .cal-year {
 	height: 100%;
 	
+	& .clndr {
+		height: 100%;
+	}
+	
 	&__container {
 		display: flex;
 		flex-flow: column;
