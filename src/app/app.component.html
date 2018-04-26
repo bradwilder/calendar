@@ -2,8 +2,8 @@
 
 <div class="body-with-header">
 	<div class="cal__container container-fluid">
-		<app-month-calendar *ngIf="showing === 'Month'" [options]="monthOptions"></app-month-calendar>
+		<app-month-calendar *ngIf="showing === 'Month'" [events]="events" [today]="today" [currMonth]="currMonth" [currYear]="currYear" (monthChanged)="onMonthChanged($event)"></app-month-calendar>
 		
-		<app-year-calendar *ngIf="showing === 'Year'" [options]="yearOptions"></app-year-calendar>
+		<app-year-calendar *ngIf="showing === 'Year'" [events]="events" [today]="today" [currYear]="currYear" (intervalChanged)="onYearChanged($event)"></app-year-calendar>
 	</div>
 </div>
