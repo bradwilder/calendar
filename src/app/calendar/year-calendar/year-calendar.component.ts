@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -9,7 +9,7 @@ declare var $: any;
 	selector: 'app-year-calendar',
 	templateUrl: './year-calendar.component.html'
 })
-export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
+export class YearCalendarComponent implements OnInit, OnDestroy
 {
 	options: Object =
 	{
@@ -76,11 +76,12 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 			months: 12,
 			days: null,
 			interval: 12
-		}
+		},
+		events: []
 	};
-	events: Array<any>;
 	eventsSubscription: Subscription;
 	today: Date;
+	todaySubscription: Subscription;
 	currYear: number;
 	clndr;
 	
@@ -90,10 +91,22 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 	{
 		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
 		{
-			this.events = events;
+			this.options['events'] = events;
+			
+			if (this.clndr)
+			{
+				this.clndr.setEvents(this.options['events']);
+			}
 		});
 		
-		this.events = this.calendarService.getEvents();
+		this.todaySubscription = this.calendarService.todayChanged.subscribe((today: Date) =>
+		{
+			this.today = today;
+			
+			this.init();
+		});
+		
+		this.options['events'] = this.calendarService.getEvents();
 		this.currYear = this.calendarService.currYear;
 		this.today = this.calendarService.today;
 		
@@ -102,7 +115,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 	
 	init()
 	{
-		this.options['events'] = this.events;
 		this.options['startWithMonth'] = this.today.getFullYear() + "-01-01";
 		
 		if (this.clndr)
@@ -118,14 +130,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 		}
 	}
 	
-	ngOnChanges(changes: SimpleChanges)
-	{
-		if (changes.today && !changes.today.firstChange)
-		{
-			this.init();
-		}
-	}
-	
 	ngOnDestroy()
 	{
 		if (this.clndr)
@@ -134,6 +138,7 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 		}
 		
 		this.eventsSubscription.unsubscribe();
+		this.todaySubscription.unsubscribe();
 	}
 	
 	changeInterval(start, end)

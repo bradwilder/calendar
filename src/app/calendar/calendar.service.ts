@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 export class CalendarService
 {
 	today: Date;
+	todayChanged = new Subject<Date>();
 	private events: Array<any>;
 	eventsChanged = new Subject<Array<any>>();
 	currMonth: number;
@@ -33,6 +34,8 @@ export class CalendarService
 		if (!this.today || now.getFullYear() != this.today.getFullYear() || now.getMonth() != this.today.getMonth() || now.getDate() != this.today.getDate())
 		{
 			this.today = now;
+			
+			this.todayChanged.next(this.today);
 		}
 	}
 	

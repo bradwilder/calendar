@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -9,7 +9,7 @@ declare var $: any;
 	selector: 'app-month-calendar',
 	templateUrl: './month-calendar.component.html'
 })
-export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
+export class MonthCalendarComponent implements OnInit, OnDestroy
 {
 	options: Object =
 	{
@@ -59,13 +59,14 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 		clickEvents:
 		{
 			onMonthChange: this.changeMonth.bind(this)
-		}
+		},
+		events: []
 	};
-	events: Array<any>;
 	eventsSubscription: Subscription;
 	currMonth: number;
 	currYear: number;
 	today: Date;
+	todaySubscription: Subscription;
 	clndr;
 	
 	constructor(private calendarService: CalendarService) {}
@@ -74,10 +75,22 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 	{
 		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
 		{
-			this.events = events;
+			this.options['events'] = events;
+			
+			if (this.clndr)
+			{
+				this.clndr.setEvents(this.options['events']);
+			}
 		});
 		
-		this.events = this.calendarService.getEvents();
+		this.todaySubscription = this.calendarService.todayChanged.subscribe((today: Date) =>
+		{
+			this.today = today;
+			
+			this.init();
+		});
+		
+		this.options['events'] = this.calendarService.getEvents();
 		this.currMonth = this.calendarService.currMonth;
 		this.currYear = this.calendarService.currYear;
 		this.today = this.calendarService.today;
@@ -87,8 +100,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 	
 	init()
 	{
-		this.options['events'] = this.events;
-		
 		if (this.clndr)
 		{
 			this.clndr.destroy();
@@ -103,14 +114,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 		}
 	}
 	
-	ngOnChanges(changes: SimpleChanges)
-	{
-		if (changes.today && !changes.today.firstChange)
-		{
-			this.init();
-		}
-	}
-	
 	ngOnDestroy()
 	{
 		if (this.clndr)
@@ -119,6 +122,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 		}
 		
 		this.eventsSubscription.unsubscribe();
+		this.todaySubscription.unsubscribe();
 	}
 	
 	changeMonth(month)
