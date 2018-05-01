@@ -80,15 +80,15 @@ export class YearCalendarComponent implements OnInit, OnDestroy
 		events: []
 	};
 	eventsSubscription: Subscription;
-	today: Date;
 	todaySubscription: Subscription;
-	currYear: number;
 	clndr;
 	
 	constructor(private calendarService: CalendarService) {}
 	
 	ngOnInit()
 	{
+		this.options['events'] = this.calendarService.getEvents();
+		
 		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
 		{
 			this.options['events'] = events;
@@ -99,34 +99,25 @@ export class YearCalendarComponent implements OnInit, OnDestroy
 			}
 		});
 		
-		this.todaySubscription = this.calendarService.todayChanged.subscribe((today: Date) =>
-		{
-			this.today = today;
-			
-			this.init();
-		});
-		
-		this.options['events'] = this.calendarService.getEvents();
-		this.currYear = this.calendarService.currYear;
-		this.today = this.calendarService.today;
+		this.todaySubscription = this.calendarService.todayChanged.subscribe(this.init);
 		
 		this.init();
 	}
 	
 	init()
 	{
-		this.options['startWithMonth'] = this.today.getFullYear() + "-01-01";
-		
 		if (this.clndr)
 		{
 			this.clndr.destroy();
 		}
 		
+		this.options['startWithMonth'] = this.calendarService.today.getFullYear() + "-01-01";
+		
 		this.clndr = $('.cal-year').clndr(this.options);
 		
-		if (this.currYear && this.currYear != this.today.getFullYear())
+		if (this.calendarService.hasDifferingCurrentYear())
 		{
-			this.clndr.setYear(this.currYear);
+			this.clndr.setYear(this.calendarService.currYear);
 		}
 	}
 	

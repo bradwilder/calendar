@@ -63,9 +63,6 @@ export class MonthCalendarComponent implements OnInit, OnDestroy
 		events: []
 	};
 	eventsSubscription: Subscription;
-	currMonth: number;
-	currYear: number;
-	today: Date;
 	todaySubscription: Subscription;
 	clndr;
 	
@@ -73,6 +70,8 @@ export class MonthCalendarComponent implements OnInit, OnDestroy
 	
 	ngOnInit()
 	{
+		this.options['events'] = this.calendarService.getEvents();
+		
 		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
 		{
 			this.options['events'] = events;
@@ -83,17 +82,7 @@ export class MonthCalendarComponent implements OnInit, OnDestroy
 			}
 		});
 		
-		this.todaySubscription = this.calendarService.todayChanged.subscribe((today: Date) =>
-		{
-			this.today = today;
-			
-			this.init();
-		});
-		
-		this.options['events'] = this.calendarService.getEvents();
-		this.currMonth = this.calendarService.currMonth;
-		this.currYear = this.calendarService.currYear;
-		this.today = this.calendarService.today;
+		this.todaySubscription = this.calendarService.todayChanged.subscribe(this.init);
 		
 		this.init();
 	}
@@ -107,10 +96,10 @@ export class MonthCalendarComponent implements OnInit, OnDestroy
 		
 		this.clndr = $('.cal-month').clndr(this.options);
 		
-		if ((this.currYear && this.currMonth) && (this.currYear != this.today.getFullYear() || this.currMonth != this.today.getMonth()))
+		if (this.calendarService.hasDifferingCurrentMonth())
 		{
-			this.clndr.setYear(this.currYear);
-			this.clndr.setMonth(this.currMonth);
+			this.clndr.setYear(this.calendarService.currYear);
+			this.clndr.setMonth(this.calendarService.currMonth);
 		}
 	}
 	
