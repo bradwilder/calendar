@@ -11,10 +11,10 @@ export class CalendarService
 	currMonth: number;
 	currYear: number;
 	
-	constructor(private _dataService: DataService)
+	constructor(private dataService: DataService)
 	{
 		this.today = new Date();
-		this._dataService.getEvents().subscribe((res) => 
+		this.dataService.getEvents().subscribe((res) => 
 		{
 			this.events = res;
 			this.eventsChanged.next(this.events.slice());
