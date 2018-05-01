@@ -2,8 +2,6 @@ import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular
 import { CalendarService } from '../calendar.service';
 import { Subscription } from 'rxjs/Subscription';
 
-declare var $: any;
-
 @Component
 ({
 	selector: 'app-month-calendar',
