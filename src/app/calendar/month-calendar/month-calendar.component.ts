@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { CalendarService } from '../calendar.service';
+import { Subscription } from 'rxjs/Subscription';
 
 declare var $: any;
 
@@ -59,17 +61,27 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 			onMonthChange: this.changeMonth
 		}
 	};
-	@Input() events: Array<any>;
-	@Input() currMonth: number;
-	@Input() currYear: number;
-	@Input() today: Date;
-	@Output() monthChanged: EventEmitter<Object> = new EventEmitter<Object>();
+	events: Array<any>;
+	eventsSubscription: Subscription;
+	currMonth: number;
+	currYear: number;
+	today: Date;
 	clndr;
 	
-	constructor() {}
+	constructor(private calendarService: CalendarService) {}
 	
 	ngOnInit()
 	{
+		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
+		{
+			this.events = events;
+		});
+		
+		this.events = this.calendarService.getEvents();
+		this.currMonth = this.calendarService.currMonth;
+		this.currYear = this.calendarService.currYear;
+		this.today = this.calendarService.today;
+		
 		this.init();
 	}
 	
@@ -82,7 +94,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 			this.clndr.destroy();
 		}
 		
-		this.clndr = $('#cal-month').clndr(this.options);
+		this.clndr = $('.cal-month').clndr(this.options);
 		
 		this.clndr.componentRef = this;
 		
@@ -107,10 +119,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 		{
 			this.clndr.destroy();
 		}
+		
+		this.eventsSubscription.unsubscribe();
 	}
 	
 	changeMonth(month)
 	{
-		((<any>this).componentRef).monthChanged.emit(month);
+		(<any>(<any>this).componentRef).calendarService.currMonth = month.month();
+		(<any>(<any>this).componentRef).calendarService.currYear = month.year();
 	}
 }

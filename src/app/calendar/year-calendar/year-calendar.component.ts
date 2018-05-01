@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { CalendarService } from '../calendar.service';
+import { Subscription } from 'rxjs/Subscription';
 
 declare var $: any;
 
@@ -76,16 +78,25 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 			interval: 12
 		}
 	};
-	@Input() events: Array<any>;
-	@Input() currYear: number;
-	@Input() today: Date;
-	@Output() intervalChanged: EventEmitter<{start: Object, end: Object}> = new EventEmitter<{start: Object, end: Object}>();
+	events: Array<any>;
+	eventsSubscription: Subscription;
+	today: Date;
+	currYear: number;
 	clndr;
 	
-	constructor() {}
+	constructor(private calendarService: CalendarService) {}
 	
 	ngOnInit()
 	{
+		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
+		{
+			this.events = events;
+		});
+		
+		this.events = this.calendarService.getEvents();
+		this.currYear = this.calendarService.currYear;
+		this.today = this.calendarService.today;
+		
 		this.init();
 	}
 	
@@ -99,7 +110,7 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 			this.clndr.destroy();
 		}
 		
-		this.clndr = $('#cal-year').clndr(this.options);
+		this.clndr = $('.cal-year').clndr(this.options);
 		this.clndr.componentRef = this;
 		
 		if (this.currYear && this.currYear != this.today.getFullYear())
@@ -122,10 +133,12 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 		{
 			this.clndr.destroy();
 		}
+		
+		this.eventsSubscription.unsubscribe();
 	}
 	
 	changeInterval(start, end)
 	{
-		((<any>this).componentRef).intervalChanged.emit({start: start, end: end});
+		(<any>(<any>this).componentRef).calendarService.currYear = start.year();
 	}
 }

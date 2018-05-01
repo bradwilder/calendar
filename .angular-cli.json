@@ -32,7 +32,8 @@
 		"../node_modules/jquery/dist/jquery.min.js",
 		"../node_modules/underscore/underscore-min.js",
         "../bower_components/moment/min/moment.min.js",
-		"../bower_components/clndr/clndr.min.js"
+		"../bower_components/clndr/clndr.min.js",
+		"../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments":

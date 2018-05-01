@@ -7,6 +7,8 @@ import { DataService } from './data.service';
 import { MenuComponent } from './menu/menu.component';
 import { YearCalendarComponent } from './calendar/year-calendar/year-calendar.component';
 import { MonthCalendarComponent } from './calendar/month-calendar/month-calendar.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CalendarService } from './calendar/calendar.service';
 
 @NgModule({
   declarations: [
@@ -17,9 +19,10 @@ import { MonthCalendarComponent } from './calendar/month-calendar/month-calendar
   ],
   imports: [
     BrowserModule,
-    HttpModule
+	HttpModule,
+	AppRoutingModule
   ],
-  providers: [DataService],
+  providers: [DataService, CalendarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

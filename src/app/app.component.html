@@ -1,9 +1,7 @@
-<app-menu (viewChanged)="showing = $event"></app-menu>
+<app-menu></app-menu>
 
 <div class="body-with-header">
 	<div class="cal__container container-fluid">
-		<app-month-calendar *ngIf="showing === 'Month'" [events]="events" [today]="today" [currMonth]="currMonth" [currYear]="currYear" (monthChanged)="onMonthChanged($event)"></app-month-calendar>
-		
-		<app-year-calendar *ngIf="showing === 'Year'" [events]="events" [today]="today" [currYear]="currYear" (intervalChanged)="onYearChanged($event)"></app-year-calendar>
+		<router-outlet></router-outlet>
 	</div>
 </div>
