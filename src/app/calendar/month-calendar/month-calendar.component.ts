@@ -58,7 +58,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 		trackSelectedDate: true,
 		clickEvents:
 		{
-			onMonthChange: this.changeMonth
+			onMonthChange: this.changeMonth.bind(this)
 		}
 	};
 	events: Array<any>;
@@ -96,8 +96,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 		
 		this.clndr = $('.cal-month').clndr(this.options);
 		
-		this.clndr.componentRef = this;
-		
 		if ((this.currYear && this.currMonth) && (this.currYear != this.today.getFullYear() || this.currMonth != this.today.getMonth()))
 		{
 			this.clndr.setYear(this.currYear);
@@ -125,7 +123,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, OnDestroy
 	
 	changeMonth(month)
 	{
-		(<any>(<any>this).componentRef).calendarService.currMonth = month.month();
-		(<any>(<any>this).componentRef).calendarService.currYear = month.year();
+		this.calendarService.currMonth = month.month();
+		this.calendarService.currYear = month.year();
 	}
 }

@@ -69,7 +69,7 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 		trackSelectedDate: true,
 		clickEvents:
 		{
-			onIntervalChange: this.changeInterval
+			onIntervalChange: this.changeInterval.bind(this)
 		},
 		lengthOfTime:
 		{
@@ -111,7 +111,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 		}
 		
 		this.clndr = $('.cal-year').clndr(this.options);
-		this.clndr.componentRef = this;
 		
 		if (this.currYear && this.currYear != this.today.getFullYear())
 		{
@@ -139,6 +138,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, OnDestroy
 	
 	changeInterval(start, end)
 	{
-		(<any>(<any>this).componentRef).calendarService.currYear = start.year();
+		this.calendarService.currYear = start.year();
 	}
 }
