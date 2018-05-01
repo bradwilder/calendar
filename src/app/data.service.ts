@@ -14,7 +14,7 @@ export class DataService
     {
 		return this._http.get("/api/events").map((result) =>
 		{
-			this.result = result.json().data
+			return this.result = result.json().data
 		});
     }
 }
