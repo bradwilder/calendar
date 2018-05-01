@@ -12,7 +12,9 @@ export class DataService
     
 	getEvents()
     {
-      return this._http.get("/api/events")
-        .map(result => this.result = result.json().data);
+		return this._http.get("/api/events").map((result) =>
+		{
+			this.result = result.json().data
+		});
     }
 }
