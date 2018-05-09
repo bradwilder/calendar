@@ -37,7 +37,7 @@ export class CalendarBaseModel
 			}
 		});
 		
-		this.todaySubscription = this.calendarService.todayChanged.subscribe(this.mode === CalendarViewType.Month ? this.createMonthCalendar : this.createYearCalendar);
+		this.todaySubscription = this.calendarService.todayChanged.subscribe(this.mode === CalendarViewType.Month ? this.createMonthCalendar.bind(this) : this.createYearCalendar.bind(this));
 		
 		this.mode === CalendarViewType.Month ? this.createMonthCalendar() : this.createYearCalendar();
 	}
