@@ -16,7 +16,7 @@ export class YearCalendarComponent implements OnInit, OnDestroy
 	{
 		this.calendarModel.options = Object.assign(this.calendarModel.options,
 		{
-			template: 
+			template:
 			`
 				<div class="cal-year__container">
 					<div class="cal-year__controls clndr-controls">

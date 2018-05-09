@@ -16,7 +16,7 @@ export class MonthCalendarComponent implements OnInit, OnDestroy
 	{
 		this.calendarModel.options = Object.assign(this.calendarModel.options,
 		{
-			template: 
+			template:
 			`
 				<div class="clndr-controls">
 					<div class="clndr-control-button">
