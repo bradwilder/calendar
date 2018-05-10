@@ -15,6 +15,8 @@ export class CalendarService
 	constructor(private dataService: DataService)
 	{
 		this.today = new Date();
+		this.currYear = this.today.getFullYear();
+		this.currMonth = this.today.getMonth();
 		this.dataService.getEvents().subscribe((res) => 
 		{
 			this.events = res;
@@ -42,15 +44,5 @@ export class CalendarService
 	getEvents()
 	{
 		return this.events.slice();
-	}
-	
-	hasDifferingCurrentYear()
-	{
-		return this.currYear && this.currYear != this.today.getFullYear();
-	}
-	
-	hasDifferingCurrentMonth()
-	{
-		return (this.currYear && this.currMonth) && (this.currYear != this.today.getFullYear() || this.currMonth != this.today.getMonth());
 	}
 }

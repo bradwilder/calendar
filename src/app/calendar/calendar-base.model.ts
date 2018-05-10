@@ -68,10 +68,7 @@ export class CalendarBaseModel
 		
 		this.clndr = $('.cal-year').clndr(this.options);
 		
-		if (this.calendarService.hasDifferingCurrentYear())
-		{
-			this.clndr.setYear(this.calendarService.currYear);
-		}
+		this.clndr.setYear(this.calendarService.currYear);
 	}
 	
 	private createMonthCalendar()
@@ -80,11 +77,8 @@ export class CalendarBaseModel
 		
 		this.clndr = $('.cal-month').clndr(this.options);
 		
-		if (this.calendarService.hasDifferingCurrentMonth())
-		{
-			this.clndr.setYear(this.calendarService.currYear);
-			this.clndr.setMonth(this.calendarService.currMonth);
-		}
+		this.clndr.setYear(this.calendarService.currYear);
+		this.clndr.setMonth(this.calendarService.currMonth);
 	}
 	
 	private destroyCalendar()
