@@ -45,4 +45,14 @@ export class CalendarService
 	{
 		return this.events.slice();
 	}
+	
+	hasDifferingCurrentYear()
+	{
+		return this.currYear != this.today.getFullYear();
+	}
+	
+	hasDifferingCurrentMonth()
+	{
+		return this.currYear != this.today.getFullYear() || this.currMonth != this.today.getMonth();
+	}
 }
