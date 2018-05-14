@@ -2,6 +2,7 @@ import { Subscription } from "rxjs/Subscription";
 import { CalendarService } from "./calendar.service";
 import { Injectable } from "@angular/core";
 import { CalendarViewType } from "./calendar-view-type.enum";
+import { Event } from '../shared/event.model';
 
 declare var $: any;
 
@@ -27,7 +28,7 @@ export class CalendarBaseModel
 		
 		this.options['events'] = this.calendarService.getEvents();
 		
-		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<any>) =>
+		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<Event>) =>
 		{
 			this.options['events'] = events;
 			

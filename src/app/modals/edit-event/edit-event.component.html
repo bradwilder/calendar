@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h4 class="modal-title">Add Event</h4>
+	<h4 class="modal-title">Edit Event</h4>
 	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -8,21 +8,22 @@
 	<div class="modal-body">
 		<div class="form-group">
 			<label for="type">Event type</label>
-			<select class="form-control" name="type" id="type" ngModel required>
+			<select class="form-control" name="type" id="type" [(ngModel)]="event.eventCode" required>
 				<option *ngFor="let eventType of eventTypes" [value]="eventType.code">{{ eventType.name }}</option>
 			</select>
 		</div>
 		<div class="form-group">
 			<label for="name">Name</label>
-			<input class="form-control" type="text" name="name" id="name" ngModel placeholder="Name" maxlength="50" required/>
+			<input class="form-control" type="text" name="name" id="name" [(ngModel)]="event.name" placeholder="Name" maxlength="50" required/>
 		</div>
 		<div class="form-group">
 			<label for="description">Description</label>
-			<textarea class="form-control" name="description" id="description" ngModel placeholder="Description" maxlength="2000" rows="4" cols="40"></textarea>
+			<textarea class="form-control" name="description" id="description" [(ngModel)]="event.description" placeholder="Description" maxlength="2000" rows="4" cols="40"></textarea>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" (click)="activeModal.close()">Cancel</button>
-		<input type="submit" name="submit" class="btn btn-primary" value="Save" [disabled]="!form.valid"/>
+		<button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+		<input type="submit" name="submit" class="btn btn-primary" value="Save" [disabled]="!form.valid || !form.dirty"/>
 	</div>
 </form>

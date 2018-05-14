@@ -21,7 +21,9 @@
 						<div class="day-contents">{{ day.day }}</div>
 						<div *ngIf="day.events.length > 0" class="day-icons">
 							<span *ngFor="let event of day.events" class="day-icon-container">
-								<img class="day-icon" src="/assets/event-type-icons/{{ event.eventCode }}.svg">
+								<app-edit-event-modal [event]="event">
+									<img class="day-icon" src="/assets/event-type-icons/{{ event.eventCode }}.svg">
+								</app-edit-event-modal>
 							</span>
 						</div>
 						<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>

@@ -14,6 +14,7 @@ import { CalendarService } from './calendar/calendar.service';
 import { AddEventModalComponent, AddEventComponent } from './modals/add-event/add-event.component';
 import { YearCalendarSubComponent } from './calendar/year-calendar/year-calendar-sub/year-calendar-sub.component';
 import { MonthCalendarSubComponent } from './calendar/month-calendar/month-calendar-sub/month-calendar-sub.component';
+import { EditEventModalComponent, EditEventComponent } from './modals/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { MonthCalendarSubComponent } from './calendar/month-calendar/month-calen
 	AddEventModalComponent,
 	AddEventComponent,
     YearCalendarSubComponent,
-    MonthCalendarSubComponent
+    MonthCalendarSubComponent,
+	EditEventModalComponent,
+	EditEventComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,6 @@ import { MonthCalendarSubComponent } from './calendar/month-calendar/month-calen
   ],
   providers: [DataService, CalendarService],
   bootstrap: [AppComponent],
-  entryComponents: [YearCalendarSubComponent, MonthCalendarSubComponent, AddEventComponent]
+  entryComponents: [YearCalendarSubComponent, MonthCalendarSubComponent, AddEventComponent, EditEventComponent]
 })
 export class AppModule { }

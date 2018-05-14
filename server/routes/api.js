@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID; 
 
 // Connect
 const connection = (closure) =>
@@ -50,7 +51,7 @@ router.get('/events', (req, res) =>
 	});
 });
 
-router.post('/addEvent', function(req, res)
+router.post('/addEvent', (req, res) =>
 {
 	let newEvent =
 	{
@@ -72,6 +73,58 @@ router.post('/addEvent', function(req, res)
 				sendError(err, res);
 			}
 		});
+	});
+	
+	res.json(response);
+});
+
+router.post('/updateEvent', (req, res) =>
+{
+	let newEvent =
+	{
+		name: req.body.name,
+		eventCode: req.body.eventCode,
+		date: new Date(req.body.date)
+	}
+	if (req.body.description)
+	{
+		newEvent.description = req.body.description;
+	}
+	
+	connection((db) =>
+	{
+		db.collection('events').updateOne
+		(
+			{_id: ObjectID(req.body.id)},
+			{$set: newEvent},
+			(err, res) =>
+			{
+				if (err)
+				{
+					sendError(err, res);
+				}
+			}
+		);
+	});
+	
+	res.json(response);
+});
+
+router.post('/deleteEvent', (req, res) =>
+{
+	connection((db) =>
+	{
+		db.collection('events').remove
+		(
+			{_id: ObjectID(req.body.id)},
+			(err, res) =>
+			{
+				if (err)
+				{
+					sendError(err, res);
+				}
+			}
+		);
 	});
 	
 	res.json(response);

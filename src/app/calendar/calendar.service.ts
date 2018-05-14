@@ -1,13 +1,14 @@
 import { DataService } from "../data.service";
 import { Subject } from "rxjs/Subject";
 import { Injectable } from "@angular/core";
+import { Event } from '../shared/event.model';
 
 @Injectable()
 export class CalendarService
 {
 	today: Date;
 	todayChanged = new Subject<void>();
-	private events = [];
+	private events: Array<Event> = [];
 	eventsChanged = new Subject<Array<any>>();
 	currMonth: number;
 	currYear: number;
@@ -46,11 +47,31 @@ export class CalendarService
 		return this.events.slice();
 	}
 	
-	addEvent(date: Date, name: string, eventCode: string, description: string)
+	addEvent(event: Event)
 	{
-		const newEvent = {date: date, name: name, description: description, eventCode: eventCode};
+		this.dataService.addEvent(event).subscribe(null);
 		
-		this.dataService.addEvent(newEvent).subscribe(null);
+		this.dataService.getEvents().subscribe((res) => 
+		{
+			this.events = res;
+			this.eventsChanged.next(this.getEvents());
+		});
+	}
+	
+	updateEvent(event: Event)
+	{
+		this.dataService.updateEvent(event).subscribe(null);
+		
+		this.dataService.getEvents().subscribe((res) => 
+		{
+			this.events = res;
+			this.eventsChanged.next(this.getEvents());
+		});
+	}
+	
+	deleteEvent(event: Event)
+	{
+		this.dataService.deleteEvent(event).subscribe(null);
 		
 		this.dataService.getEvents().subscribe((res) => 
 		{

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarService } from '../../calendar/calendar.service';
 import { NgForm } from '@angular/forms';
+import { Event } from '../../shared/event.model';
 
 @Component
 ({
@@ -25,7 +26,9 @@ export class AddEventComponent implements OnInit
 	
 	onSubmit(form: NgForm)
 	{
-		this.calendarService.addEvent(this.date, form.value.name, form.value.type, form.value.description);
+		const event = new Event(form.value.name, form.value.type, this.date, form.value.description);
+		
+		this.calendarService.addEvent(event);
 		this.activeModal.dismiss();
 	}
 }
