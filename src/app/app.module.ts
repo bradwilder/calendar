@@ -16,28 +16,41 @@ import { YearCalendarSubComponent } from './calendar/year-calendar/year-calendar
 import { MonthCalendarSubComponent } from './calendar/month-calendar/month-calendar-sub/month-calendar-sub.component';
 import { EditEventModalComponent, EditEventComponent } from './modals/edit-event/edit-event.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    MenuComponent,
-    YearCalendarComponent,
-    MonthCalendarComponent,
-	AddEventModalComponent,
-	AddEventComponent,
-    YearCalendarSubComponent,
-    MonthCalendarSubComponent,
-	EditEventModalComponent,
-	EditEventComponent
-  ],
-  imports: [
-    BrowserModule,
-	HttpModule,
-	AppRoutingModule,
-	FormsModule,
-	NgbModule.forRoot()
-  ],
-  providers: [DataService, CalendarService],
-  bootstrap: [AppComponent],
-  entryComponents: [YearCalendarSubComponent, MonthCalendarSubComponent, AddEventComponent, EditEventComponent]
+@NgModule
+({
+	declarations:
+	[
+		AppComponent,
+		MenuComponent,
+		YearCalendarComponent,
+		MonthCalendarComponent,
+		AddEventModalComponent,
+		AddEventComponent,
+		YearCalendarSubComponent,
+		MonthCalendarSubComponent,
+		EditEventModalComponent,
+		EditEventComponent
+	],
+	imports:
+	[
+		BrowserModule,
+		HttpModule,
+		AppRoutingModule,
+		FormsModule,
+		NgbModule.forRoot()
+	],
+	providers:
+	[
+		DataService,
+		CalendarService
+	],
+	bootstrap: [AppComponent],
+	entryComponents:
+	[
+		YearCalendarSubComponent,
+		MonthCalendarSubComponent,
+		AddEventComponent,
+		EditEventComponent
+	]
 })
-export class AppModule { }
+export class AppModule {}
