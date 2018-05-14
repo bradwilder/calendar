@@ -50,10 +50,13 @@ export class CalendarService
 	{
 		const newEvent = {date: date, name: name, description: description, eventCode: eventCode};
 		
-		this.events.push(newEvent);
-		this.eventsChanged.next(this.getEvents());
-		
 		this.dataService.addEvent(newEvent).subscribe(null);
+		
+		this.dataService.getEvents().subscribe((res) => 
+		{
+			this.events = res;
+			this.eventsChanged.next(this.getEvents());
+		});
 	}
 	
 	getEventTypes()
