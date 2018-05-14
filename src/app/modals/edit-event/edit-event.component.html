@@ -7,9 +7,13 @@
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 	<div class="modal-body">
 		<div class="form-group">
+			<label>Date</label>
+			<p class="form-control">{{ getDateString() }}</p>
+		</div>
+		<div class="form-group">
 			<label for="type">Event type</label>
 			<select class="form-control" name="type" id="type" [(ngModel)]="event.eventCode" required>
-				<option *ngFor="let eventType of eventTypes" [value]="eventType.code">{{ eventType.name }}</option>
+				<option *ngFor="let eventType of eventTypes" [value]="eventType._id">{{ eventType.name }}</option>
 			</select>
 		</div>
 		<div class="form-group">

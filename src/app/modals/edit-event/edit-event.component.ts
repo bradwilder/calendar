@@ -38,6 +38,11 @@ export class EditEventComponent implements OnInit
 			this.activeModal.dismiss();
 		}
 	}
+	
+	getDateString()
+	{
+		return new Date(this.event.date).toLocaleDateString('en-US');
+	}
 }
 
 @Component

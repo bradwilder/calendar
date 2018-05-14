@@ -31,6 +31,11 @@ export class AddEventComponent implements OnInit
 		this.calendarService.addEvent(event);
 		this.activeModal.dismiss();
 	}
+	
+	getDateString()
+	{
+		return this.date.toLocaleDateString('en-US');
+	}
 }
 
 @Component
