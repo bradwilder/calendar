@@ -7,7 +7,7 @@ export class CalendarService
 {
 	today: Date;
 	todayChanged = new Subject<void>();
-	private events: Array<any> = [];
+	private events = [];
 	eventsChanged = new Subject<Array<any>>();
 	currMonth: number;
 	currYear: number;
@@ -44,6 +44,21 @@ export class CalendarService
 	getEvents()
 	{
 		return this.events.slice();
+	}
+	
+	addEvent(date: Date, name: string, eventCode: string, description: string)
+	{
+		const newEvent = {date: date, name: name, description: description, eventCode: eventCode};
+		
+		this.events.push(newEvent);
+		this.eventsChanged.next(this.getEvents());
+		
+		this.dataService.addEvent(newEvent).subscribe(null);
+	}
+	
+	getEventTypes()
+	{
+		return this.dataService.getEventTypes();
 	}
 	
 	hasDifferingCurrentYear()

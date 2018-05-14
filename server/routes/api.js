@@ -1,7 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
 
 // Connect
 const connection = (closure) =>
@@ -39,18 +37,61 @@ router.get('/events', (req, res) =>
 {
 	connection((db) =>
 	{
-        db.collection('events')
-            .find()
-            .toArray()
+		db.collection('events').find().toArray()
 			.then((events) =>
 			{
-                response.data = events;
-                res.json(response);
-            })
+				response.data = events;
+				res.json(response);
+			})
 			.catch((err) =>
 			{
-                sendError(err, res);
-            });
+				sendError(err, res);
+			});
+	});
+});
+
+router.post('/addEvent', function(req, res)
+{
+	let newEvent =
+	{
+		name: req.body.name,
+		eventCode: req.body.eventCode,
+		date: new Date(req.body.date)
+	}
+	if (req.body.description)
+	{
+		newEvent.description = req.body.description;
+	}
+	
+	connection((db) =>
+	{
+		db.collection('events').insertOne(newEvent, (err, res) =>
+		{
+			if (err)
+			{
+				sendError(err, res);
+			}
+		});
+	});
+	
+	res.json(response);
+});
+
+// Get event types
+router.get('/event-types', (req, res) =>
+{
+	connection((db) =>
+	{
+		db.collection('eventTypes').find().toArray()
+			.then((eventTypes) =>
+			{
+				response.data = eventTypes;
+				res.json(response);
+			})
+			.catch((err) =>
+			{
+				sendError(err, res);
+			});
 	});
 });
 

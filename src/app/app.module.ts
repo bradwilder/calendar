@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NgForm, FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpModule } from '@angular/http';
 import { DataService } from './data.service';
@@ -10,21 +11,30 @@ import { YearCalendarComponent } from './calendar/year-calendar/year-calendar.co
 import { MonthCalendarComponent } from './calendar/month-calendar/month-calendar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarService } from './calendar/calendar.service';
+import { AddEventModalComponent, AddEventComponent } from './modals/add-event/add-event.component';
+import { YearCalendarSubComponent } from './calendar/year-calendar/year-calendar-sub/year-calendar-sub.component';
+import { MonthCalendarSubComponent } from './calendar/month-calendar/month-calendar-sub/month-calendar-sub.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     YearCalendarComponent,
-    MonthCalendarComponent
+    MonthCalendarComponent,
+	AddEventModalComponent,
+	AddEventComponent,
+    YearCalendarSubComponent,
+    MonthCalendarSubComponent
   ],
   imports: [
     BrowserModule,
 	HttpModule,
 	AppRoutingModule,
-	FormsModule
+	FormsModule,
+	NgbModule.forRoot()
   ],
   providers: [DataService, CalendarService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [YearCalendarSubComponent, MonthCalendarSubComponent, AddEventComponent]
 })
 export class AppModule { }

@@ -49,6 +49,16 @@ export class CalendarBaseModel
 		this.todaySubscription.unsubscribe();
 	}
 	
+	previousInterval()
+	{
+		this.clndr.previous();
+	}
+	
+	nextInterval()
+	{
+		this.clndr.next();
+	}
+	
 	changeMonth(month)
 	{
 		this.calendarService.currMonth = month.month();
@@ -66,7 +76,7 @@ export class CalendarBaseModel
 		
 		this.options['startWithMonth'] = this.calendarService.today.getFullYear() + "-01-01";
 		
-		this.clndr = $('.cal-year').clndr(this.options);
+		this.clndr = $('#cal').clndr(this.options);
 		
 		if (this.calendarService.hasDifferingCurrentYear())
 		{
@@ -78,7 +88,7 @@ export class CalendarBaseModel
 	{
 		this.destroyCalendar();
 		
-		this.clndr = $('.cal-month').clndr(this.options);
+		this.clndr = $('#cal').clndr(this.options);
 		
 		if (this.calendarService.hasDifferingCurrentMonth())
 		{
