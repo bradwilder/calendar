@@ -34,6 +34,21 @@ let response =
 };
 
 // Get events
+const createEventFromBody = (body) =>
+{
+	let newEvent =
+	{
+		name: body.name,
+		eventCode: body.eventCode,
+		date: new Date(body.date)
+	}
+	if (body.description)
+	{
+		newEvent.description = body.description;
+	}
+	return newEvent;
+}
+
 router.get('/events', (req, res) =>
 {
 	connection((db) =>
@@ -53,16 +68,7 @@ router.get('/events', (req, res) =>
 
 router.post('/addEvent', (req, res) =>
 {
-	let newEvent =
-	{
-		name: req.body.name,
-		eventCode: req.body.eventCode,
-		date: new Date(req.body.date)
-	}
-	if (req.body.description)
-	{
-		newEvent.description = req.body.description;
-	}
+	let newEvent = createEventFromBody(req.body);
 	
 	connection((db) =>
 	{
@@ -80,16 +86,7 @@ router.post('/addEvent', (req, res) =>
 
 router.post('/updateEvent', (req, res) =>
 {
-	let newEvent =
-	{
-		name: req.body.name,
-		eventCode: req.body.eventCode,
-		date: new Date(req.body.date)
-	}
-	if (req.body.description)
-	{
-		newEvent.description = req.body.description;
-	}
+	let newEvent = createEventFromBody(req.body);
 	
 	connection((db) =>
 	{
