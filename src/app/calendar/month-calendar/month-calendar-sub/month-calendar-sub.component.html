@@ -2,11 +2,11 @@
 	<div class="clndr">
 		<div class="clndr-controls">
 			<div class="clndr-control-button">
-				<span class="clndr-previous-button" (click)="onPreviousClicked()"><i class="fa fa-chevron-left"></i> Previous</span>
+				<span class="clndr-previous-button" (click)="calendarModel.previousInterval()"><i class="fa fa-chevron-left"></i> Previous</span>
 			</div>
 			<div class="clndr-control-title">{{ month }} {{ year }}</div>
 			<div class="clndr-control-button rightalign">
-				<span class="clndr-next-button" (click)="onNextClicked()">Next <i class="fa fa-chevron-right"></i></span>
+				<span class="clndr-next-button" (click)="calendarModel.nextInterval()">Next <i class="fa fa-chevron-right"></i></span>
 			</div>
 		</div>
 		<table class="clndr-table clndr-block" border="0" cellspacing="0" cellpadding="0">
@@ -20,7 +20,9 @@
 					<td *ngFor="let day of weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onDayClicked(day)">
 						<div class="day-contents">{{ day.day }}</div>
 						<div *ngIf="day.events.length > 0" class="day-icons">
-							<img *ngFor="let event of day.events" class="day-icon" src="/assets/event-type-icons/{{ event.eventCode }}.svg">
+							<span *ngFor="let event of day.events" class="day-icon-container">
+								<img class="day-icon" src="/assets/event-type-icons/{{ event.eventCode }}.svg">
+							</span>
 						</div>
 						<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>
 					</td>

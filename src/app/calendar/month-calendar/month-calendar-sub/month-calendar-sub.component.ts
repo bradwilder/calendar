@@ -16,16 +16,6 @@ export class MonthCalendarSubComponent
 	@Input() calendarModel: CalendarBaseModel;
 	selectedDay = "";
 	
-	onPreviousClicked()
-	{
-		this.calendarModel.previousInterval();
-	}
-	
-	onNextClicked()
-	{
-		this.calendarModel.nextInterval();
-	}
-	
 	onDayClicked(day)
 	{
 		if (!day.properties.isAdjacentMonth)
@@ -44,11 +34,11 @@ export class MonthCalendarSubComponent
 		{
 			if (day.classes.indexOf('last-month') != -1)
 			{
-				this.onPreviousClicked();
+				this.calendarModel.previousInterval();
 			}
 			else if (day.classes.indexOf('next-month') != -1)
 			{
-				this.onNextClicked();
+				this.calendarModel.nextInterval();
 			}
 		}
 	}

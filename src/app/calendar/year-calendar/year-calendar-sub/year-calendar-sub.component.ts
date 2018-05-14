@@ -15,16 +15,6 @@ export class YearCalendarSubComponent
 	@Input() calendarModel: CalendarBaseModel;
 	selectedDay = "";
 	
-	onPreviousClicked()
-	{
-		this.calendarModel.previousInterval();
-	}
-	
-	onNextClicked()
-	{
-		this.calendarModel.nextInterval();
-	}
-	
 	onSelectDay(date)
 	{
 		if (date)
