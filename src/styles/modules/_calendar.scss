@@ -3,7 +3,6 @@
 	padding-top: 3em;
 	padding-bottom: 3em;
 	max-width: 100%;
-	font-family: 'Droid Sans Mono';
 	font-size: 14px;
 	
 	@include atMedium {
@@ -19,6 +18,7 @@
 			display: inline-block;
 			width: 100%;
 			position: relative;
+			font-family: 'Droid Sans Mono';
 			
 			& .clndr-control-title {
 				float: left;
@@ -63,6 +63,7 @@
 			table-layout: fixed;
 			border-collapse: collapse;
 			width: 100%;
+			font-family: 'Raleway';
 			
 			& th,
 			& td {
