@@ -3,7 +3,6 @@
 		font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
 		text-transform: uppercase;
 		letter-spacing: .03em;
-		font-weight: lighter;
 		
 		&--wide {
 			letter-spacing: .05em;
@@ -13,8 +12,12 @@
 			text-transform: none;
 		}
 		
+		&--lighter {
+			font-weight: lighter;
+		}
+		
 		&--darker {
-			font-weight: normal;
+			font-weight: bold;
 		}
 	}
 	
