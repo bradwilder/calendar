@@ -1,0 +1,31 @@
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	border: 1px solid #ccc;
+}
+
+tr.odd {
+	background-color: #F6F7F9
+}
+
+tr.even {
+	background-color: #eee;
+}
+
+thead {
+	background-color: #0D70A6;
+	color: seashell;
+}
+
+tbody {
+	color: #666;
+}
+
+.icon {
+	max-width: 30px;
+}

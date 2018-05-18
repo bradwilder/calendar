@@ -1,0 +1,24 @@
+<h2 class="type__title">Event Types</h2>
+
+<table>
+	<thead>
+		<tr class="type__title">
+			<th>Name</th>
+			<th>Code</th>
+			<th>Icon</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let eventType of eventTypes; let i = index" class="type__desc" [ngClass]="{even: i % 2 === 0, odd: i % 2 !== 0}">
+			<td>{{ eventType.name }}</td>
+			<td>{{ eventType._id }}</td>
+			<td>
+				<img class="icon" src="/assets/event-type-icons/{{ eventType._id }}.svg" alt="{{ eventType._id }}">
+			</td>
+			<td>
+				<i class="fa fa-pencil"></i>
+			</td>
+		</tr>
+	</tbody>
+</table>
