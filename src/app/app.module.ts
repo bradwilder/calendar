@@ -17,7 +17,7 @@ import { MonthCalendarSubComponent } from './calendar/month-calendar/month-calen
 import { EditEventModalComponent, EditEventComponent } from './modals/edit-event/edit-event.component';
 import { EditEventTypesComponent } from './config/edit-event-types/edit-event-types.component';
 import { ConfigComponent } from './config/config.component';
-import { EditEventTypeComponent } from './modals/edit-event-type/edit-event-type.component';
+import { EditEventTypeModalComponent, EditEventTypeComponent } from './modals/edit-event-type/edit-event-type.component';
 
 @NgModule
 ({
@@ -35,6 +35,7 @@ import { EditEventTypeComponent } from './modals/edit-event-type/edit-event-type
 		EditEventComponent,
 		EditEventTypesComponent,
 		ConfigComponent,
+		EditEventTypeModalComponent,
 		EditEventTypeComponent
 	],
 	imports:
@@ -56,7 +57,8 @@ import { EditEventTypeComponent } from './modals/edit-event-type/edit-event-type
 		YearCalendarSubComponent,
 		MonthCalendarSubComponent,
 		AddEventComponent,
-		EditEventComponent
+		EditEventComponent,
+		EditEventTypeComponent
 	]
 })
 export class AppModule {}

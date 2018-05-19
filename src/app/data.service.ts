@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Event } from './shared/event.model'
 import { Observable } from 'rxjs/Observable';
+import { EventType } from './shared/event-type.model';
 
 @Injectable()
 export class DataService
@@ -41,5 +42,20 @@ export class DataService
 	getEventTypes()
     {
 		return this._http.get("/api/event-types").map((result) => result.json().data);
-    }
+	}
+	
+	updateEventType(eventType: EventType)
+	{
+		return this._http.post("/api/updateEventType", eventType);
+	}
+	
+	canDeleteEventType(eventType: EventType)
+	{
+		return this._http.get("/api/eventsByType?type=" + eventType._id).map((result) => result.json().data === 0);
+	}
+	
+	deleteEventType(eventType: EventType)
+	{
+		return this._http.post("/api/deleteEventType", {id: eventType._id});
+	}
 }

@@ -1,0 +1,23 @@
+<div class="modal-header">
+	<h4 class="modal-title">Edit Event Type</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+	<div class="modal-body">
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input class="form-control" type="text" name="name" id="name" [(ngModel)]="eventType.name" placeholder="Name" maxlength="50" required/>
+		</div>
+		<div class="form-group">
+			<label for="icon">Icon</label>
+			<input type="file" class="form-control" name="icon" id="icon" ngModel (change)="getFile($event)" accept=".svg">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" (click)="activeModal.close()">Cancel</button>
+		<button *ngIf="canDelete" type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+		<input type="submit" name="submit" class="btn btn-primary" value="Save" [disabled]="!form.valid || (!form.dirty && !file)"/>
+	</div>
+</form>

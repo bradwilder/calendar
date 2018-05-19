@@ -17,7 +17,9 @@
 				<img class="icon" src="/assets/event-type-icons/{{ eventType._id }}.svg" alt="{{ eventType._id }}">
 			</td>
 			<td>
-				<i class="fa fa-pencil"></i>
+				<app-edit-event-type-modal [eventType]="eventType">
+					<i class="icon-btn fa fa-pencil"></i>
+				</app-edit-event-type-modal>
 			</td>
 		</tr>
 	</tbody>

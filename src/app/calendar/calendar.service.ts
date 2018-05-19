@@ -2,6 +2,7 @@ import { DataService } from "../data.service";
 import { Subject } from "rxjs/Subject";
 import { Injectable } from "@angular/core";
 import { Event } from '../shared/event.model';
+import { EventType } from "../shared/event-type.model";
 
 @Injectable()
 export class CalendarService
@@ -83,6 +84,27 @@ export class CalendarService
 	getEventTypes()
 	{
 		return this.dataService.getEventTypes();
+	}
+	
+	updateEventType(eventType: EventType)
+	{
+		this.dataService.updateEventType(eventType).subscribe(null);
+		
+		this.dataService.getEvents().subscribe((res) => 
+		{
+			this.events = res;
+			this.eventsChanged.next(this.getEvents());
+		});
+	}
+	
+	canDeleteEventType(eventType: EventType)
+	{
+		return this.dataService.canDeleteEventType(eventType);
+	}
+	
+	deleteEventType(eventType: EventType)
+	{
+		this.dataService.deleteEventType(eventType).subscribe(null);
 	}
 	
 	hasDifferingCurrentYear()

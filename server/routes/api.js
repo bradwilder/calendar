@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID; 
+const ObjectID = require('mongodb').ObjectID;
+const fs = require('fs');
+const path = require('path');
 
 // Connect
 const connection = (closure) =>
@@ -42,7 +44,7 @@ const createEventFromBody = (body) =>
 		eventCode: body.eventCode,
 		date: new Date(body.date)
 	}
-	if (body.description)
+	if (body.hasOwnProperty('description'))
 	{
 		newEvent.description = body.description;
 	}
@@ -66,45 +68,81 @@ router.get('/events', (req, res) =>
 	});
 });
 
+router.get('/eventsByType', (req, res) =>
+{
+	connection((db) =>
+	{
+		db.collection('events').count({eventCode: req.query.type})
+			.then((count) =>
+			{
+				response.data = count;
+				res.json(response);
+			})
+			.catch((err) =>
+			{
+				sendError(err, res);
+			});
+	});
+});
+
 router.post('/addEvent', (req, res) =>
 {
 	let newEvent = createEventFromBody(req.body);
 	
+	if (newEvent.hasOwnProperty('description') && !newEvent.description)
+	{
+		delete newEvent.description;
+	}
+	
 	connection((db) =>
 	{
-		db.collection('events').insertOne(newEvent, (err, res) =>
+		db.collection('events').insertOne(newEvent, (err, dbRes) =>
 		{
 			if (err)
 			{
 				sendError(err, res);
 			}
+			else
+			{
+				res.json(response);
+			}
 		});
 	});
-	
-	res.json(response);
 });
 
 router.post('/updateEvent', (req, res) =>
 {
 	let newEvent = createEventFromBody(req.body);
 	
+	let unsetObj = {};
+	if (newEvent.hasOwnProperty('description') && !newEvent.description)
+	{
+		delete newEvent.description;
+		unsetObj.description = "";
+	}
+	
 	connection((db) =>
 	{
 		db.collection('events').updateOne
 		(
 			{_id: ObjectID(req.body.id)},
-			{$set: newEvent},
-			(err, res) =>
+			{
+				$set: newEvent,
+				$unset: unsetObj
+			},
+			(err, dbRes) =>
 			{
 				if (err)
 				{
 					sendError(err, res);
 				}
+				else
+				{
+					res.json(response);
+				}
 			}
 		);
 	});
-	
-	res.json(response);
 });
 
 router.post('/deleteEvent', (req, res) =>
@@ -114,17 +152,19 @@ router.post('/deleteEvent', (req, res) =>
 		db.collection('events').remove
 		(
 			{_id: ObjectID(req.body.id)},
-			(err, res) =>
+			(err, dbRes) =>
 			{
 				if (err)
 				{
 					sendError(err, res);
 				}
+				else
+				{
+					res.json(response);
+				}
 			}
 		);
 	});
-	
-	res.json(response);
 });
 
 // Get event types
@@ -142,6 +182,74 @@ router.get('/event-types', (req, res) =>
 			{
 				sendError(err, res);
 			});
+	});
+});
+
+router.post('/updateEventType', (req, res) =>
+{
+	if (req.body.iconFileStr)
+	{
+		const iconFile = path.resolve(__dirname, '../../src/assets/event-type-icons/' + req.body._id + '.svg');
+		
+		fs.unlink(iconFile, (err) =>
+		{
+			if (err)
+			{
+				sendError(err, res);
+				return;
+			}
+			
+			fs.writeFile(iconFile, req.body.iconFileStr, (err) =>
+			{
+				if (err)
+				{
+					sendError(err, res);
+					return;
+				}
+			});
+		});
+	}
+	
+	connection((db) =>
+	{
+		db.collection('eventTypes').updateOne
+		(
+			{_id: req.body._id},
+			{$set: {name: req.body.name}},
+			(err, dbRes) =>
+			{
+				if (err)
+				{
+					sendError(err, res);
+				}
+				else
+				{
+					res.json(response);
+				}
+			}
+		);
+	});
+});
+
+router.post('/deleteEventType', (req, res) =>
+{
+	connection((db) =>
+	{
+		db.collection('eventTypes').remove
+		(
+			{_id: ObjectID(req.body._id)},
+			(err, dbRes) =>
+			{
+				if (err)
+				{
+					sendError(err, res);
+				}
+				else
+				{
+					res.json(response);
+				}
+			}
+		);
 	});
 });
 
