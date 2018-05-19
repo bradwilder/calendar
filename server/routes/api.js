@@ -35,7 +35,7 @@ let response =
     message: null
 };
 
-// Get events
+// Events
 const createEventFromBody = (body) =>
 {
 	let newEvent =
@@ -167,8 +167,18 @@ router.post('/deleteEvent', (req, res) =>
 	});
 });
 
-// Get event types
-router.get('/event-types', (req, res) =>
+// Event types
+const createEventTypeFromBody = (body) =>
+{
+	let newEventType =
+	{
+		_id: body._id,
+		name: body.name
+	}
+	return newEventType;
+}
+
+router.get('/eventTypes', (req, res) =>
 {
 	connection((db) =>
 	{
@@ -181,6 +191,64 @@ router.get('/event-types', (req, res) =>
 			.catch((err) =>
 			{
 				sendError(err, res);
+			});
+	});
+});
+
+router.post('/addEventType', (req, res) =>
+{
+	connection((db) =>
+	{
+		console.log(req.body._id);
+		db.collection('eventTypes').count({$or: [{_id: req.body._id}, {name: req.body.name}]})
+			.then((count) =>
+			{
+				console.log(count);
+				if (count === 0)
+				{
+					if (req.body.iconFileStr)
+					{
+						const iconFile = path.resolve(__dirname, '../../src/assets/event-type-icons/' + req.body._id + '.svg');
+						
+						fs.writeFile(iconFile, req.body.iconFileStr, (err) =>
+						{
+							if (err)
+							{
+								sendError(err, res);
+								return;
+							}
+						});
+					}
+					else
+					{
+						sendError('No icon file data', res);
+						return;
+					}
+					
+					const newEventType = createEventTypeFromBody(req.body);
+					
+					db.collection('eventTypes').insertOne(newEventType, (err, dbRes) =>
+					{
+						if (err)
+						{
+							sendError(err, res);
+						}
+						else
+						{
+							res.json(response);
+						}
+					});
+				}
+				else
+				{
+					sendError('Name and/or code are already in use', res);
+					return;
+				}
+			})
+			.catch((err) =>
+			{
+				sendError(err, res);
+				return;
 			});
 	});
 });
@@ -233,11 +301,22 @@ router.post('/updateEventType', (req, res) =>
 
 router.post('/deleteEventType', (req, res) =>
 {
+	const iconFile = path.resolve(__dirname, '../../src/assets/event-type-icons/' + req.body.id + '.svg');
+	
+	fs.unlink(iconFile, (err) =>
+	{
+		if (err)
+		{
+			sendError(err, res);
+			return;
+		}
+	});
+	
 	connection((db) =>
 	{
 		db.collection('eventTypes').remove
 		(
-			{_id: ObjectID(req.body._id)},
+			{_id: req.body.id},
 			(err, dbRes) =>
 			{
 				if (err)

@@ -41,7 +41,12 @@ export class DataService
 	
 	getEventTypes()
     {
-		return this._http.get("/api/event-types").map((result) => result.json().data);
+		return this._http.get("/api/eventTypes").map((result) => result.json().data);
+	}
+	
+	addEventType(eventType: EventType)
+	{
+		return this._http.post("/api/addEventType", eventType);
 	}
 	
 	updateEventType(eventType: EventType)

@@ -86,6 +86,19 @@ export class CalendarService
 		return this.dataService.getEventTypes();
 	}
 	
+	addEventType(eventType: EventType)
+	{
+		this.dataService.addEventType(eventType).subscribe(null, (response) =>
+		{
+			var message = response.json().message;
+			
+			if (message)
+			{
+				alert('Error: ' +  message);
+			}
+		});
+	}
+	
 	updateEventType(eventType: EventType)
 	{
 		this.dataService.updateEventType(eventType).subscribe(null);

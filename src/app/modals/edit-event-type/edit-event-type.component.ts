@@ -36,7 +36,7 @@ export class EditEventTypeComponent implements OnInit
 	private onReaderLoaded(readerEvt)
 	{
 		this.eventType.iconFileStr = readerEvt.target.result;
-	} 
+	}
 	
 	onSubmit(form: NgForm)
 	{
