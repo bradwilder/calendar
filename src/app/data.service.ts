@@ -10,7 +10,7 @@ export class DataService
 {
 	constructor(private http: Http) {}
 	
-	getEvents(): Observable<Array<Event>>
+	getEvents(): Observable<Event[]>
     {
 		return this.http.get("/api/events").map((result) =>
 		{

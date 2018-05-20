@@ -1,0 +1,6 @@
+<button class="filter-btn"><i class="fa fa-close" (click)="onClear()"></i></button>
+<input class="filter-btn" type="checkbox" [(checked)]="enabled">
+<span class="filter-desc">Type</span>
+<select (change)="onChange($event.target.value)">
+	<option *ngFor="let eventType of eventTypes" [value]="eventType._id">{{ eventType.name }}</option>
+</select>

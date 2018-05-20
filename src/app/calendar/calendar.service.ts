@@ -3,82 +3,69 @@ import { Subject } from "rxjs/Subject";
 import { Injectable } from "@angular/core";
 import { Event } from '../shared/event.model';
 import { EventType } from "../shared/event-type.model";
+import { FiltersService } from "../filters/filters.service";
+import { TodayService } from "./today.service";
+import { Subscription } from "rxjs/Subscription";
 
 @Injectable()
 export class CalendarService
 {
-	today: Date;
-	todayChanged = new Subject<void>();
-	private events: Array<Event> = [];
-	eventsChanged = new Subject<Array<any>>();
+	private events: Event[] = [];
+	eventsChanged = new Subject<Event[]>();
 	currMonth: number;
 	currYear: number;
+	filtersSubscription: Subscription;
 	
-	constructor(private dataService: DataService)
+	constructor(private dataService: DataService, private filtersService: FiltersService, public todayService: TodayService)
 	{
-		this.today = new Date();
-		this.currYear = this.today.getFullYear();
-		this.currMonth = this.today.getMonth();
+		this.currYear = this.todayService.today.getFullYear();
+		this.currMonth = this.todayService.today.getMonth();
+		this.updateEvents();
+		
+		this.filtersSubscription = this.filtersService.filtersChanged.subscribe(() =>
+		{
+			this.eventsChanged.next(this.getEvents());
+		});
+	}
+	
+	getEvents()
+	{
+		return this.filtersService.filter(this.events);
+	}
+	
+	getEventsCount()
+	{
+		return this.filtersService.filter(this.events).length;
+	}
+	
+	private updateEvents()
+	{
 		this.dataService.getEvents().subscribe((res) => 
 		{
 			this.events = res;
 			this.eventsChanged.next(this.getEvents());
 		});
-		
-		window.setInterval(() =>
-		{
-			this.checkDate();
-		}, 10000);
-	}
-	
-	checkDate()
-	{
-		const now = new Date();
-		
-		if (!this.today || now.getFullYear() != this.today.getFullYear() || now.getMonth() != this.today.getMonth() || now.getDate() != this.today.getDate())
-		{
-			this.today = now;
-			
-			this.todayChanged.next();
-		}
-	}
-	
-	getEvents()
-	{
-		return this.events.slice();
 	}
 	
 	addEvent(event: Event)
 	{
 		this.dataService.addEvent(event).subscribe(null);
 		
-		this.dataService.getEvents().subscribe((res) => 
-		{
-			this.events = res;
-			this.eventsChanged.next(this.getEvents());
-		});
+		this.updateEvents();
 	}
 	
 	updateEvent(event: Event)
 	{
 		this.dataService.updateEvent(event).subscribe(null);
 		
-		this.dataService.getEvents().subscribe((res) => 
-		{
-			this.events = res;
-			this.eventsChanged.next(this.getEvents());
-		});
+		this.updateEvents();
 	}
 	
 	deleteEvent(event: Event)
 	{
 		this.dataService.deleteEvent(event).subscribe(null);
 		
-		this.dataService.getEvents().subscribe((res) => 
-		{
-			this.events = res;
-			this.eventsChanged.next(this.getEvents());
-		});
+		this.updateEvents();
 	}
 	
 	getEventTypes()
@@ -103,11 +90,7 @@ export class CalendarService
 	{
 		this.dataService.updateEventType(eventType).subscribe(null);
 		
-		this.dataService.getEvents().subscribe((res) => 
-		{
-			this.events = res;
-			this.eventsChanged.next(this.getEvents());
-		});
+		this.updateEvents();
 	}
 	
 	canDeleteEventType(eventType: EventType)
@@ -122,11 +105,11 @@ export class CalendarService
 	
 	hasDifferingCurrentYear()
 	{
-		return this.currYear != this.today.getFullYear();
+		return this.currYear != this.todayService.today.getFullYear();
 	}
 	
 	hasDifferingCurrentMonth()
 	{
-		return this.currYear != this.today.getFullYear() || this.currMonth != this.today.getMonth();
+		return this.currYear != this.todayService.today.getFullYear() || this.currMonth != this.todayService.today.getMonth();
 	}
 }

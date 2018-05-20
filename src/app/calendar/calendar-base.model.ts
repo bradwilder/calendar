@@ -28,7 +28,7 @@ export class CalendarBaseModel
 		
 		this.options['events'] = this.calendarService.getEvents();
 		
-		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Array<Event>) =>
+		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Event[]) =>
 		{
 			this.options['events'] = events;
 			
@@ -38,7 +38,7 @@ export class CalendarBaseModel
 			}
 		});
 		
-		this.todaySubscription = this.calendarService.todayChanged.subscribe(this.mode === CalendarViewType.Month ? this.createMonthCalendar.bind(this) : this.createYearCalendar.bind(this));
+		this.todaySubscription = this.calendarService.todayService.todayChanged.subscribe(this.mode === CalendarViewType.Month ? this.createMonthCalendar.bind(this) : this.createYearCalendar.bind(this));
 		
 		this.mode === CalendarViewType.Month ? this.createMonthCalendar() : this.createYearCalendar();
 	}
@@ -75,7 +75,7 @@ export class CalendarBaseModel
 	{
 		this.destroyCalendar();
 		
-		this.options['startWithMonth'] = this.calendarService.today.getFullYear() + "-01-01";
+		this.options['startWithMonth'] = this.calendarService.todayService.today.getFullYear() + "-01-01";
 		
 		this.clndr = $('#cal').clndr(this.options);
 		

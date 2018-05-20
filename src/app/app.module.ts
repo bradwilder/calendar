@@ -21,6 +21,12 @@ import { EditEventTypeModalComponent, EditEventTypeComponent } from './modals/ed
 import { AddEventTypeModalComponent, AddEventTypeComponent } from './modals/add-event-type/add-event-type.component';
 import { CalendarControlsComponent } from './calendar/calendar-controls/calendar-controls.component';
 import { CalendarTableComponent } from './calendar/calendar-table/calendar-table.component';
+import { FiltersComponent } from './filters/filters.component';
+import { FiltersService } from './filters/filters.service';
+import { TodayService } from './calendar/today.service';
+import { TypeFilterComponent } from './filters/type-filter/type-filter.component';
+import { NameFilterComponent } from './filters/name-filter/name-filter.component';
+import { DescriptionFilterComponent } from './filters/description-filter/description-filter.component';
 
 @NgModule
 ({
@@ -43,7 +49,11 @@ import { CalendarTableComponent } from './calendar/calendar-table/calendar-table
 		AddEventTypeModalComponent,
 		AddEventTypeComponent,
 		CalendarControlsComponent,
-		CalendarTableComponent
+		CalendarTableComponent,
+		FiltersComponent,
+		TypeFilterComponent,
+		NameFilterComponent,
+		DescriptionFilterComponent
 	],
 	imports:
 	[
@@ -56,7 +66,9 @@ import { CalendarTableComponent } from './calendar/calendar-table/calendar-table
 	providers:
 	[
 		DataService,
-		CalendarService
+		CalendarService,
+		TodayService,
+		FiltersService
 	],
 	bootstrap: [AppComponent],
 	entryComponents:

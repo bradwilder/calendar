@@ -1,0 +1,11 @@
+<div class="filter-summary">
+	<button class="filter-btn"><i class="fa fa-close" (click)="onClear()"></i></button>
+	<button class="filter-btn"><i class="fa" [ngClass]="{'fa-angle-up': !open, 'fa-angle-down': open}" (click)="onOpenToggle()"></i></button>
+	<input class="filter-btn" type="checkbox" [(checked)]="enabled">
+	<span class="filter-desc">Showing {{ calendarService.getEventsCount() }} events</span>
+</div>
+<div [hidden]="!open">
+	<app-type-filter></app-type-filter>
+	<app-name-filter></app-name-filter>
+	<app-description-filter></app-description-filter>
+</div>
