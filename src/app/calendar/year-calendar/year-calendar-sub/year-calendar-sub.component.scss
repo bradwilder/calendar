@@ -1,10 +1,6 @@
 .cal-year {
 	height: 100%;
 	
-	& .clndr {
-		height: 100%;
-	}
-	
 	&__container {
 		display: flex;
 		flex-flow: column;
@@ -19,11 +15,11 @@
 		flex: 0 1 auto;
 		overflow-y: auto;
 		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 	
 	&__title {
 		text-align: center;
-		font-weight: bold;
 	}
 	
 	&__table {
@@ -31,15 +27,16 @@
 		margin-bottom: 10px;
 	}
 	
-	@media (min-width:768px) and (max-width:1199px) {
-		& .col-sm-6:nth-child(2n+1) {
-			clear:left;
-		}
+	&__days {
+		height: 55px !important;
 	}
 	
-	@media (min-width:1200px) {
-		& .col-lg-4:nth-child(3n+1) {
-			clear:left;
-		}
+	&__icons {
+		text-align: center;
+	}
+	
+	&__icon {
+		height: .4em !important;
+		width: .4em !important;
 	}
 }

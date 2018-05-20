@@ -1,5 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { CalendarBaseModel } from '../../calendar-base.model';
+import { CalendarViewType } from '../../calendar-view-type.enum';
 
 @Component
 ({
@@ -15,6 +16,7 @@ export class MonthCalendarSubComponent
 	@Input() daysOfTheWeek = [];
 	@Input() calendarModel: CalendarBaseModel;
 	selectedDay = "";
+	viewType = CalendarViewType.Month;
 	
 	onDayClicked(day)
 	{

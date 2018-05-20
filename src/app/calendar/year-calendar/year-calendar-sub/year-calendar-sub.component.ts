@@ -1,11 +1,12 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CalendarBaseModel } from '../../calendar-base.model';
+import { CalendarViewType } from '../../calendar-view-type.enum';
 
 @Component
 ({
 	selector: 'app-year-calendar-sub',
 	templateUrl: './year-calendar-sub.component.html',
-	encapsulation: ViewEncapsulation.None
+	styleUrls: ['./year-calendar-sub.component.scss']
 })
 export class YearCalendarSubComponent
 {
@@ -14,6 +15,7 @@ export class YearCalendarSubComponent
 	@Input() daysOfTheWeek = [];
 	@Input() calendarModel: CalendarBaseModel;
 	selectedDay = "";
+	viewType = CalendarViewType.Year;
 	
 	onSelectDay(date)
 	{

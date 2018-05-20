@@ -19,6 +19,7 @@ import { EditEventTypesComponent } from './config/edit-event-types/edit-event-ty
 import { ConfigComponent } from './config/config.component';
 import { EditEventTypeModalComponent, EditEventTypeComponent } from './modals/edit-event-type/edit-event-type.component';
 import { AddEventTypeModalComponent, AddEventTypeComponent } from './modals/add-event-type/add-event-type.component';
+import { CalendarControlsComponent } from './calendar/calendar-controls/calendar-controls.component';
 
 @NgModule
 ({
@@ -39,7 +40,8 @@ import { AddEventTypeModalComponent, AddEventTypeComponent } from './modals/add-
 		EditEventTypeModalComponent,
 		EditEventTypeComponent,
 		AddEventTypeModalComponent,
-		AddEventTypeComponent
+		AddEventTypeComponent,
+		CalendarControlsComponent
 	],
 	imports:
 	[

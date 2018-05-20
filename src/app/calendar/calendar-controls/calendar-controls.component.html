@@ -1,0 +1,9 @@
+<div [ngClass]="{'cal-year__controls': isYearView()}" class="clndr-controls type__label type__label--emphasis">
+	<div class="clndr-control-button">
+		<span class="clndr-previous-button" (click)="calendarModel.previousInterval()"><i class="fa fa-chevron-left"></i> Prev</span>
+	</div>
+	<div class="clndr-control-title">{{ title }}</div>
+	<div class="clndr-control-button rightalign">
+		<span class="clndr-next-button" (click)="calendarModel.nextInterval()">Next <i class="fa fa-chevron-right"></i></span>
+	</div>
+</div>

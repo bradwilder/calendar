@@ -1,0 +1,41 @@
+@import '../../../styles/base/_constants.scss';
+
+.clndr-controls {
+	display: inline-block;
+	width: 100%;
+	position: relative;
+	
+	& .clndr-control-title {
+		float: left;
+		width: 34%;
+		text-align: center;
+	}
+	
+	& .clndr-control-button {
+		float: left;
+		width: 33%;
+		
+		&.rightalign {
+			text-align: right;
+		}
+		
+		& .clndr-next-button,
+		& .clndr-previous-button {
+			cursor: pointer;
+			user-select: none;
+			
+			&:hover {
+				background-color: $inactive-color;
+			}
+			
+			&.inactive {
+				opacity: 0.5;
+				
+				&:hover {
+					background: none;
+					cursor: default;
+				}
+			}
+		}
+	}
+}

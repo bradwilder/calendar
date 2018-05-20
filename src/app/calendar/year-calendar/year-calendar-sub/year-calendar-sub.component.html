@@ -1,37 +1,27 @@
 <div class='cal cal-year'>
-	<div class="clndr">
-		<div class="cal-year__container">
-			<div class="cal-year__controls clndr-controls">
-				<div class="clndr-control-button">
-					<span class="clndr-previous-button" (click)="calendarModel.previousInterval()"><i class="fa fa-chevron-left"></i> Prev</span>
-				</div>
-				<div class="clndr-control-title">{{ year }}</div>
-				<div class="clndr-control-button rightalign">
-					<span class="clndr-next-button" (click)="calendarModel.nextInterval()">Next <i class="fa fa-chevron-right"></i></span>
-				</div>
-			</div>
-			<div class="row cal-year__row">
-				<div *ngFor="let month of months" class="clndr-block col-lg-4 col-sm-6">
-					<div class="cal-year__title">{{ month.month.format("MMMM") }}</div>
-					<table class="cal-year__table clndr-table" border="0" cellspacing="0" cellpadding="0">
-						<thead>
-							<tr class="header-days">
-								<th *ngFor="let day of daysOfTheWeek" class="header-day">{{ day }}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let week of month.weeks; let i = index" class="table-days table-days--short">
-								<td *ngFor="let day of month.weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onSelectDay(day.date)">
-									<div class="day-contents">{{ day.day }}</div>
-									<div class="day-icons day-icons--center">
-										<img *ngIf="day.events.length > 0" class="day-icon day-icon--small" src="/assets/event-type-icons/circle.svg">
-									</div>
-									<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+	<div class="cal-year__container">
+		<app-calendar-controls [viewType]="viewType" [title]="year" [calendarModel]="calendarModel"></app-calendar-controls>
+		<div class="row cal-year__row">
+			<div *ngFor="let month of months" class="clndr-block col-lg-4 col-sm-6">
+				<div class="cal-year__title type__desc type__desc--emphasis">{{ month.month.format("MMMM") }}</div>
+				<table class="cal-year__table clndr-table type__desc">
+					<thead>
+						<tr>
+							<th *ngFor="let day of daysOfTheWeek">{{ day }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let week of month.weeks; let i = index" class="cal-year__days">
+							<td *ngFor="let day of month.weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onSelectDay(day.date)">
+								<div class="day-contents">{{ day.day }}</div>
+								<div *ngIf="day.events.length > 0" class="day-icons cal-year__icons">
+									<img class="day-icon cal-year__icon" src="/assets/event-type-icons/circle.svg">
+								</div>
+								<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

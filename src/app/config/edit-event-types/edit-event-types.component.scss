@@ -1,3 +1,5 @@
+@import '../../../styles/base/_constants.scss';
+
 table {
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -6,24 +8,24 @@ table {
 
 th,
 td {
-	border: 1px solid #ccc;
+	border: 1px solid $border-color;
 }
 
 tr.odd {
-	background-color: #F6F7F9
+	background-color: $day-color;
 }
 
 tr.even {
-	background-color: #eee;
+	background-color: $day-color-hover;
 }
 
 thead {
-	background-color: #0D70A6;
-	color: seashell;
+	background-color: $primary-color-1;
+	color: $text-color-light;
 }
 
 tbody {
-	color: #666;
+	color: $text-color;
 }
 
 .icon {

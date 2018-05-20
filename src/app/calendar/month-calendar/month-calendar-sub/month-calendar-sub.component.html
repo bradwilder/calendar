@@ -1,35 +1,25 @@
-<div class="cal cal-month">
-	<div class="clndr">
-		<div class="clndr-controls">
-			<div class="clndr-control-button">
-				<span class="clndr-previous-button" (click)="calendarModel.previousInterval()"><i class="fa fa-chevron-left"></i> Prev</span>
-			</div>
-			<div class="clndr-control-title">{{ month }} {{ year }}</div>
-			<div class="clndr-control-button rightalign">
-				<span class="clndr-next-button" (click)="calendarModel.nextInterval()">Next <i class="fa fa-chevron-right"></i></span>
-			</div>
-		</div>
-		<table class="clndr-table clndr-block" border="0" cellspacing="0" cellpadding="0">
-			<thead>
-				<tr class="header-days">
-					<th *ngFor="let day of daysOfTheWeek" class="header-day">{{ day }}</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let week of weeks; let i = index" class="table-days">
-					<td *ngFor="let day of weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onDayClicked(day)">
-						<div class="day-contents">{{ day.day }}</div>
-						<div *ngIf="day.events.length > 0" class="day-icons">
-							<span *ngFor="let event of day.events" class="day-icon-container">
-								<app-edit-event-modal [event]="event">
-									<img class="day-icon" src="/assets/event-type-icons/{{ event.eventCode }}.svg">
-								</app-edit-event-modal>
-							</span>
-						</div>
-						<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<div class="cal">
+	<app-calendar-controls [viewType]="viewType" [title]="month + ' ' + year" [calendarModel]="calendarModel"></app-calendar-controls>
+	<table class="clndr-table clndr-block type__desc">
+		<thead>
+			<tr>
+				<th *ngFor="let day of daysOfTheWeek">{{ day }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let week of weeks; let i = index">
+				<td *ngFor="let day of weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onDayClicked(day)">
+					<div class="day-contents">{{ day.day }}</div>
+					<div *ngIf="day.events.length > 0" class="day-icons">
+						<span *ngFor="let event of day.events" class="day-icon-container">
+							<app-edit-event-modal [event]="event">
+								<img class="day-icon" src="/assets/event-type-icons/{{ event.eventCode }}.svg">
+							</app-edit-event-modal>
+						</span>
+					</div>
+					<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

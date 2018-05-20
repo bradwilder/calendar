@@ -1,6 +1,8 @@
+@import './_constants.scss';
+
 .type {
 	&__title {
-		font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+		font-family: $font-family-title;
 		text-transform: uppercase;
 		letter-spacing: .03em;
 		
@@ -22,11 +24,15 @@
 	}
 	
 	&__desc {
-		font-family: 'Raleway', sans-serif;
+		font-family: $font-family-description;
+		
+		&--emphasis {
+			font-weight: bold;
+		}
 	}
 	
 	&__label {
-		font-family: 'Droid Sans Mono', monospace;
+		font-family: $font-family-mono;
 		font-weight: normal;
 		
 		&--emphasis {
