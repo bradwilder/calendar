@@ -14,5 +14,4 @@ export class YearCalendarSubComponent
 	@Input() year = "";
 	@Input() daysOfTheWeek = [];
 	@Input() calendarModel: CalendarBaseModel;
-	viewType = CalendarViewType.Year;
 }

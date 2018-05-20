@@ -11,7 +11,6 @@ import { CalendarBaseModel } from '../calendar-base.model';
 })
 export class CalendarTableComponent
 {
-	@Input() viewType: CalendarViewType;
 	@Input() daysOfTheWeek;
 	@Input() weeks;
 	@Input() calendarModel: CalendarBaseModel;
@@ -19,7 +18,7 @@ export class CalendarTableComponent
 	
 	isYearView()
 	{
-		return this.viewType === CalendarViewType.Year;
+		return this.calendarModel.mode === CalendarViewType.Year;
 	}
 	
 	onDayClicked(day)
