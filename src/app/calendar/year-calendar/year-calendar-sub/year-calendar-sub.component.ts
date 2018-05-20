@@ -14,18 +14,5 @@ export class YearCalendarSubComponent
 	@Input() year = "";
 	@Input() daysOfTheWeek = [];
 	@Input() calendarModel: CalendarBaseModel;
-	selectedDay = "";
 	viewType = CalendarViewType.Year;
-	
-	onSelectDay(date)
-	{
-		if (date)
-		{
-			let month = date.month() + 1;
-			let monthStr = month < 10 ? '0' + month : month;
-			let day = date.date();
-			let dayStr = day < 10 ? '0' + day : day;
-			this.selectedDay = 'calendar-day-' + date.year() + '-' + monthStr + '-' + dayStr;
-		}
-	}
 }

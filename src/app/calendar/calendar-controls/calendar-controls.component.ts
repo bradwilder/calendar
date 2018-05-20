@@ -10,12 +10,6 @@ import { CalendarBaseModel } from '../calendar-base.model';
 })
 export class CalendarControlsComponent
 {
-	@Input() viewType: CalendarViewType;
 	@Input() title: string;
 	@Input() calendarModel: CalendarBaseModel;
-	
-	isYearView()
-	{
-		return this.viewType === CalendarViewType.Year;
-	}
 }

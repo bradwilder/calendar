@@ -7,10 +7,6 @@
 		height: 100%;
 	}
 	
-	&__controls {
-		flex: 0 1 auto;
-	}
-	
 	&__row {
 		flex: 0 1 auto;
 		overflow-y: auto;
@@ -20,23 +16,5 @@
 	
 	&__title {
 		text-align: center;
-	}
-	
-	&__table {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	
-	&__days {
-		height: 55px !important;
-	}
-	
-	&__icons {
-		text-align: center;
-	}
-	
-	&__icon {
-		height: .4em !important;
-		width: .4em !important;
 	}
 }

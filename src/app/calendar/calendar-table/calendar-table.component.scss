@@ -1,0 +1,123 @@
+@import '../../../styles/base/_constants.scss';
+
+.clndr-table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	width: 100%;
+	
+	& th,
+	& td {
+		border: 1px solid $border-color;
+	}
+	
+	& thead tr {
+		height: 30px;
+		font-size: 0.78571429em;
+		background-color: $primary-color-1;
+		
+		& th {
+			vertical-align: middle;
+			text-align: center;
+			color: $text-color-light;
+		}
+	}
+	
+	& tbody tr {
+		height: 120px;
+		
+		& td {
+			vertical-align: top;
+			width: 100%;
+			height: inherit;
+			
+			&.empty {
+				background-color: $background-color;
+			}
+			
+			&.day {
+				background: $day-color;
+				position: relative;
+				
+				&:hover {
+					background: $day-color-hover;
+				}
+				
+				&.today {
+					background: $primary-color-2;
+					
+					&:hover {
+						background: $primary-color-2-1;
+					}
+				}
+				
+				&.selected {
+					outline: 1px dashed $border-color-selected;
+					outline-offset: -1px;
+				}
+				
+				&.empty,
+				&.adjacent-month {
+					background-color: $inactive-color;
+					
+					&:hover {
+						background-color: $border-color;
+					}
+				}
+				
+				& .day-contents {
+					max-height: 40px;
+					padding: 8px;
+					font-size: 0.85714286em;
+					text-align: right;
+				}
+				
+				& .day-icons {
+					max-height: 80px;
+					overflow: auto;
+					padding: 0 5px;
+				}
+				
+				& .day-icon {
+					height: 1.5em;
+					width: 1.5em;
+					cursor: pointer;
+				}
+				
+				& .day-event-btn {
+					position: absolute;
+					top: .65em;
+					left: 5px;
+					display: none;
+					pointer-events: none;
+					cursor: auto;
+				}
+				
+				&.selected .day-event-btn {
+					display: block;
+					pointer-events: auto;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+
+.cal-year {
+	&__table {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+	&__days {
+		height: 55px !important;
+	}
+	
+	&__icons {
+		text-align: center;
+	}
+	
+	&__icon {
+		height: .4em !important;
+		width: .4em !important;
+	}
+}

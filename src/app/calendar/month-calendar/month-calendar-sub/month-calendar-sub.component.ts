@@ -15,33 +15,5 @@ export class MonthCalendarSubComponent
 	@Input() year = "";
 	@Input() daysOfTheWeek = [];
 	@Input() calendarModel: CalendarBaseModel;
-	selectedDay = "";
 	viewType = CalendarViewType.Month;
-	
-	onDayClicked(day)
-	{
-		if (!day.properties.isAdjacentMonth)
-		{
-			const date = day. date;
-			if (date)
-			{
-				let month = date.month() + 1;
-				let monthStr = month < 10 ? '0' + month : month;
-				let day = date.date();
-				let dayStr = day < 10 ? '0' + day : day;
-				this.selectedDay = 'calendar-day-' + date.year() + '-' + monthStr + '-' + dayStr;
-			}
-		}
-		else
-		{
-			if (day.classes.indexOf('last-month') != -1)
-			{
-				this.calendarModel.previousInterval();
-			}
-			else if (day.classes.indexOf('next-month') != -1)
-			{
-				this.calendarModel.nextInterval();
-			}
-		}
-	}
 }

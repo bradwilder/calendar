@@ -1,27 +1,10 @@
 <div class='cal cal-year'>
 	<div class="cal-year__container">
-		<app-calendar-controls [viewType]="viewType" [title]="year" [calendarModel]="calendarModel"></app-calendar-controls>
+		<app-calendar-controls [title]="year" [calendarModel]="calendarModel"></app-calendar-controls>
 		<div class="row cal-year__row">
 			<div *ngFor="let month of months" class="clndr-block col-lg-4 col-sm-6">
 				<div class="cal-year__title type__desc type__desc--emphasis">{{ month.month.format("MMMM") }}</div>
-				<table class="cal-year__table clndr-table type__desc">
-					<thead>
-						<tr>
-							<th *ngFor="let day of daysOfTheWeek">{{ day }}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let week of month.weeks; let i = index" class="cal-year__days">
-							<td *ngFor="let day of month.weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onSelectDay(day.date)">
-								<div class="day-contents">{{ day.day }}</div>
-								<div *ngIf="day.events.length > 0" class="day-icons cal-year__icons">
-									<img class="day-icon cal-year__icon" src="/assets/event-type-icons/circle.svg">
-								</div>
-								<app-add-event-modal *ngIf="day.date" [date]="day.date.toDate()"></app-add-event-modal>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<app-calendar-table [viewType]="viewType" [daysOfTheWeek]="daysOfTheWeek" [weeks]="month.weeks" [calendarModel]="calendarModel"></app-calendar-table>
 			</div>
 		</div>
 	</div>
