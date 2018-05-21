@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FiltersService } from '../filters.service';
 import { CalendarService } from '../../calendar/calendar.service';
 import { EventType } from '../../shared/event-type.model';
@@ -20,7 +20,6 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 	filtersEnabled = false;
 	enabledSubscription: Subscription;
 	clearedSubscription: Subscription;
-	@ViewChild("types") types: ElementRef;
 	
 	constructor(private filtersService: FiltersService, private calendarService: CalendarService) {}
 	
@@ -40,14 +39,13 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 		this.clearedSubscription = this.filtersService.cleared.subscribe(() =>
 		{
 			this.onClear();
-			this.onEnable(false);
+			this.enabled = false;
+			this.onEnable();
 		});
 	}
 	
-	onChange(eventType: string)
+	onChange()
 	{
-		this.selectedType = eventType;
-		
 		if (this.selectedType != TypeFilterComponent.emptyEventType._id)
 		{
 			this.filtersService.addFilter(TypeFilterComponent.filterName, this.filterFunction.bind(this));
@@ -58,10 +56,8 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 		}
 	}
 	
-	onEnable(enabled: boolean)
+	onEnable()
 	{
-		this.enabled = enabled;
-		
 		if (this.enabled)
 		{
 			if (this.selectedType)
@@ -77,8 +73,8 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 	
 	onClear()
 	{
-		this.onChange(TypeFilterComponent.emptyEventType._id);
-		this.types.nativeElement.value = TypeFilterComponent.emptyEventType._id;
+		this.selectedType = TypeFilterComponent.emptyEventType._id;
+		this.filtersService.removeFilter(TypeFilterComponent.filterName);
 	}
 	
 	filterFunction(event: Event)

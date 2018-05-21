@@ -1,6 +1,8 @@
-<button class="filter-btn" [disabled]="!filtersEnabled"><i class="fa fa-close" (click)="onClear()"></i></button>
-<input class="filter-btn" type="checkbox" [disabled]="!filtersEnabled" [checked]="enabled" (click)="onEnable($event.target.checked)">
-<span class="filter-desc">Type</span>
-<select #types [disabled]="!filtersEnabled || !enabled" (change)="onChange($event.target.value)">
-	<option *ngFor="let eventType of eventTypes" [value]="eventType._id">{{ eventType.name }}</option>
-</select>
+<div>
+	<button class="filter-btn" [disabled]="!filtersEnabled"><i class="fa fa-close" (click)="onClear()"></i></button>
+	<input class="filter-btn" type="checkbox" [disabled]="!filtersEnabled" [(ngModel)]="enabled" (change)="onEnable()">
+	<span class="filter-desc">Type</span>
+	<select [disabled]="!filtersEnabled || !enabled" [(ngModel)]="selectedType" (change)="onChange()">
+		<option *ngFor="let eventType of eventTypes" [value]="eventType._id">{{ eventType.name }}</option>
+	</select>
+</div>
