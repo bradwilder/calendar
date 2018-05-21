@@ -1,3 +1,6 @@
-<p>
-  description-filter works!
-</p>
+<div>
+	<button class="filter-btn" [disabled]="!filtersEnabled"><i class="fa fa-close" (click)="onClear()"></i></button>
+	<input class="filter-btn" type="checkbox" [disabled]="!filtersEnabled" [(ngModel)]="enabled" (change)="onEnable()">
+	<span class="filter-desc">Desc</span>
+	<input type="text" [disabled]="!filtersEnabled || !enabled" (input)="onInput()" [(ngModel)]="selectedValue">
+</div>
