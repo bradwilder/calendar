@@ -5,6 +5,16 @@ export class FiltersService
 {
 	private filters = {};
 	filtersChanged = new Subject<void>();
+	enabled = false;
+	enabledChanged = new Subject<boolean>();
+	cleared = new Subject<void>();
+	
+	setEnabled(enabled: boolean)
+	{
+		this.enabled = enabled;
+		this.filtersChanged.next();
+		this.enabledChanged.next(this.enabled);
+	}
 	
 	addFilter(filterName: string, filter: Function)
 	{
@@ -21,7 +31,13 @@ export class FiltersService
 		this.filtersChanged.next();
 	}
 	
-	removeFilters()
+	clear()
+	{
+		this.removeFilters();
+		this.cleared.next();
+	}
+	
+	private removeFilters()
 	{
 		this.filters = {};
 		
@@ -32,11 +48,14 @@ export class FiltersService
 	{
 		let filtered = events.slice();
 		
-		for (const filterName in this.filters)
+		if (this.enabled)
 		{
-			if (this.filters.hasOwnProperty(filterName))
+			for (const filterName in this.filters)
 			{
-				filtered = filtered.filter(this.filters[filterName]);
+				if (this.filters.hasOwnProperty(filterName))
+				{
+					filtered = filtered.filter(this.filters[filterName]);
+				}
 			}
 		}
 		

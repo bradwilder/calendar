@@ -21,8 +21,14 @@ export class FiltersComponent
 		this.open = !this.open;
 	}
 	
+	onEnable(enabled: boolean)
+	{
+		this.enabled = enabled;
+		this.filtersService.setEnabled(this.enabled);
+	}
+	
 	onClear()
 	{
-		this.filtersService.removeFilters();
+		this.filtersService.clear();
 	}
 }
