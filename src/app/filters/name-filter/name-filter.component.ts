@@ -31,8 +31,7 @@ export class NameFilterComponent implements OnInit, OnDestroy
 		this.clearedSubscription = this.filtersService.cleared.subscribe(() =>
 		{
 			this.onClear();
-			this.enabled = false;
-			this.onEnable();
+			this.onEnable(false);
 		});
 	}
 	
@@ -58,8 +57,10 @@ export class NameFilterComponent implements OnInit, OnDestroy
 		}
 	}
 	
-	onEnable()
+	onEnable(enable: boolean)
 	{
+		this.enabled = enable;
+		
 		if (this.enabled)
 		{
 			if (this.selectedName)

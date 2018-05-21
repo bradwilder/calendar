@@ -16,19 +16,15 @@ export class FiltersComponent
 	
 	constructor(private calendarService: CalendarService, private filtersService: FiltersService) {}
 	
-	onOpenToggle()
+	onEnable(enable)
 	{
-		this.open = !this.open;
-	}
-	
-	onEnable(enabled: boolean)
-	{
-		this.enabled = enabled;
+		this.enabled = enable;
 		this.filtersService.setEnabled(this.enabled);
 	}
 	
 	onClear()
 	{
+		this.enabled = false;
 		this.filtersService.clear();
 	}
 }

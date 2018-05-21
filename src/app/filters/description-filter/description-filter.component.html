@@ -1,6 +1,10 @@
-<div>
-	<button class="filter-btn" [disabled]="!filtersEnabled"><i class="fa fa-close" (click)="onClear()"></i></button>
-	<input class="filter-btn" type="checkbox" [disabled]="!filtersEnabled" [(ngModel)]="enabled" (change)="onEnable()">
+<div class="filter">
 	<span class="filter-desc">Desc</span>
 	<input type="text" [disabled]="!filtersEnabled || !enabled" (input)="onInput()" [(ngModel)]="selectedValue">
+	<span class="filter-btns">
+		<span class="filter-toggle">
+			<app-toggle-switch [on]="enabled" (changed)="onEnable($event)" [enabled]="filtersEnabled"></app-toggle-switch>
+		</span>
+		<button class="filter-btn" [disabled]="!filtersEnabled"><i class="fa fa-close" (click)="onClear()"></i></button>
+	</span>
 </div>

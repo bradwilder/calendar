@@ -1,0 +1,49 @@
+@import '../../../styles/base/_constants.scss';
+
+.toggle-switch {
+	position: relative;
+	display: inline-block;
+	height: 2em;
+	width: 1em;
+	background: $primary-color-2;
+	border-radius: 1em;
+	border: .1em solid $primary-color-2-1;
+	transition: border-color .2s;
+	cursor: pointer;
+	box-sizing: border-box;
+	vertical-align: bottom;
+	margin: 0;
+	
+	&:hover:not([data-disabled="true"]) {
+		border-color: $text-color-light;
+	}
+	
+	&[data-disabled="true"] {
+		cursor: auto;
+		background: transparent;
+	}
+	
+	&__input {
+		display: none;
+	}
+	
+	&__slider {
+		position: absolute;
+		height: .6em;
+		width: .6em;
+		top: 1.1em;
+		left: .1em;
+		background: $text-color-light;
+		border-radius: 50%;
+		transition: top .25s ease-out;
+	}
+	
+	&__input:checked + &__slider {
+		background: $primary-color-1;
+		top: .1em;
+	}
+	
+	&__input:disabled + &__slider {
+		background: $inactive-color;
+	}
+}

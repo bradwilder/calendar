@@ -1,0 +1,4 @@
+<label class="toggle-switch" [attr.data-disabled]="!enabled">
+	<input type="checkbox" class="toggle-switch__input" [name]="name" [id]="name" [(ngModel)]="on" (change)="onChange()" [disabled]="!enabled">
+	<div class="toggle-switch__slider"></div>
+</label>

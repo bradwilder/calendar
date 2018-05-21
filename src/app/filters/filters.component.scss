@@ -1,7 +1,72 @@
-.filter-btn {
-	float: right;
+@import '../../styles/base/_constants.scss';
+
+.filters {
+	background-color: $primary-color-1;
+	color: $text-color-light;
+	margin-top: 10px;
 }
 
 .filter-summary {
 	text-align: center;
+	height: 50px;
+	padding-top: 7px;
+	position: relative;
+	
+	&-desc {
+		font-size: 24px;
+	}
+	
+	& .filter-btn {
+		font-size: 15px;
+		width: 30px;
+		height: 30px;
+	}
+	
+	& .filter-toggle {
+		font-size: 15px;
+	}
+	
+	& .filter-btns {
+		top: 10px;
+	}
+}
+
+.filter-btn {
+	background-color: $primary-color-2;
+}
+
+.filter-btns {
+	position: absolute;
+	right: 5px;
+}
+
+.filter-header-item {
+	margin-left: 3px;
+}
+
+.filter {
+	height: 30px;
+	padding: 5px;
+	position: relative;
+	border-top: 1px solid $border-color;
+	
+	&-desc {
+		font-size: 16px;
+		display: inline-block;
+		width: 50px;
+	}
+	
+	& .filter-btn {
+		font-size: 10px;
+		width: 24px;
+		height: 24px;
+	}
+	
+	& .filter-toggle {
+		font-size: 12px;
+	}
+	
+	& .filter-btns {
+		top: 3px;
+	}
 }

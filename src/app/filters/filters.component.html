@@ -1,11 +1,17 @@
-<div class="filter-summary">
-	<button class="filter-btn"><i class="fa fa-close" (click)="onClear()"></i></button>
-	<button class="filter-btn"><i class="fa" [ngClass]="{'fa-angle-up': !open, 'fa-angle-down': open}" (click)="onOpenToggle()"></i></button>
-	<input class="filter-btn" type="checkbox" [checked]="enabled" (click)="onEnable($event.target.checked)">
-	<span class="filter-desc">Showing {{ calendarService.getEventsCount() }} events</span>
-</div>
-<div [hidden]="!open">
-	<app-type-filter></app-type-filter>
-	<app-name-filter></app-name-filter>
-	<app-description-filter></app-description-filter>
+<div class="filters type__title">
+	<div class="filter-summary">
+		<span class="filter-summary-desc">Showing {{ calendarService.getEventsCount() }} events</span>
+		<span class="filter-btns">
+			<span class="filter-header-item filter-toggle">
+					<app-toggle-switch [on]="enabled" (changed)="onEnable($event)"></app-toggle-switch>
+			</span>
+			<button class="filter-header-item filter-btn"><i class="fa" [ngClass]="{'fa-angle-up': !open, 'fa-angle-down': open}" (click)="this.open = !this.open"></i></button>
+			<button class="filter-header-item filter-btn"><i class="fa fa-close" (click)="onClear()"></i></button>
+		</span>
+	</div>
+	<div [hidden]="!open">
+		<app-type-filter></app-type-filter>
+		<app-name-filter></app-name-filter>
+		<app-description-filter></app-description-filter>
+	</div>
 </div>
