@@ -36,7 +36,7 @@ export class NameFilterComponent implements OnInit, OnDestroy
 		});
 	}
 	
-	onInput(text: string)
+	onInput()
 	{
 		this.clearTimeout();
 		
