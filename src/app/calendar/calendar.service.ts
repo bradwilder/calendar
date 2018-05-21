@@ -1,6 +1,6 @@
 import { DataService } from "../data.service";
 import { Subject } from "rxjs/Subject";
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { Event } from '../shared/event.model';
 import { EventType } from "../shared/event-type.model";
 import { FiltersService } from "../filters/filters.service";
@@ -8,7 +8,7 @@ import { TodayService } from "./today.service";
 import { Subscription } from "rxjs/Subscription";
 
 @Injectable()
-export class CalendarService
+export class CalendarService implements OnDestroy
 {
 	private events: Event[] = [];
 	eventsChanged = new Subject<Event[]>();
@@ -111,5 +111,10 @@ export class CalendarService
 	hasDifferingCurrentMonth()
 	{
 		return this.currYear != this.todayService.today.getFullYear() || this.currMonth != this.todayService.today.getMonth();
+	}
+	
+	ngOnDestroy()
+	{
+		this.filtersSubscription.unsubscribe();
 	}
 }
