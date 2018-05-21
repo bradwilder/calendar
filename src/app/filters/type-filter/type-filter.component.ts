@@ -39,7 +39,6 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 		this.clearedSubscription = this.filtersService.cleared.subscribe(() =>
 		{
 			this.onClear();
-			this.onEnable(false);
 		});
 	}
 	
@@ -75,7 +74,7 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 	onClear()
 	{
 		this.selectedType = TypeFilterComponent.emptyEventType._id;
-		this.filtersService.removeFilter(TypeFilterComponent.filterName);
+		this.onEnable(false);
 	}
 	
 	filterFunction(event: Event)

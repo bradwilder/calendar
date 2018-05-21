@@ -34,6 +34,8 @@ export class FiltersService
 	clear()
 	{
 		this.removeFilters();
+		this.enabled = false;
+		this.enabledChanged.next(this.enabled);
 		this.cleared.next();
 	}
 	

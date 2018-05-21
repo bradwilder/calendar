@@ -28,6 +28,7 @@ import { TypeFilterComponent } from './filters/type-filter/type-filter.component
 import { NameFilterComponent } from './filters/name-filter/name-filter.component';
 import { DescriptionFilterComponent } from './filters/description-filter/description-filter.component';
 import { ToggleSwitchComponent } from './inputs/toggle-switch/toggle-switch.component';
+import { TextboxComponent } from './inputs/textbox/textbox.component';
 
 @NgModule
 ({
@@ -55,7 +56,8 @@ import { ToggleSwitchComponent } from './inputs/toggle-switch/toggle-switch.comp
 		TypeFilterComponent,
 		NameFilterComponent,
 		DescriptionFilterComponent,
-		ToggleSwitchComponent
+		ToggleSwitchComponent,
+		TextboxComponent
 	],
 	imports:
 	[

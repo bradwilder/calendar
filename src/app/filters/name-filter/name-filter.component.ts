@@ -31,12 +31,13 @@ export class NameFilterComponent implements OnInit, OnDestroy
 		this.clearedSubscription = this.filtersService.cleared.subscribe(() =>
 		{
 			this.onClear();
-			this.onEnable(false);
 		});
 	}
 	
-	onInput()
+	onInput(text: string)
 	{
+		this.selectedName = text;
+		
 		this.clearTimeout();
 		
 		this.inputTimeout = window.setTimeout(() =>
@@ -77,9 +78,8 @@ export class NameFilterComponent implements OnInit, OnDestroy
 	
 	onClear()
 	{
-		this.clearTimeout();
 		this.selectedName = '';
-		this.filtersService.removeFilter(NameFilterComponent.filterName);
+		this.onEnable(false);
 	}
 	
 	filterFunction(event: Event)
