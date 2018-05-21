@@ -3,6 +3,7 @@ import { CalendarService } from "./calendar.service";
 import { Injectable } from "@angular/core";
 import { CalendarViewType } from "./calendar-view-type.enum";
 import { Event } from '../shared/event.model';
+import { FiltersService } from "../filters/filters.service";
 
 declare var $: any;
 
@@ -20,7 +21,7 @@ export class CalendarBaseModel
 	};
 	mode: CalendarViewType;
 	
-	constructor(public calendarService: CalendarService) {}
+	constructor(public calendarService: CalendarService, private filtersService: FiltersService) {}
 	
 	init(mode: CalendarViewType)
 	{
@@ -48,6 +49,7 @@ export class CalendarBaseModel
 		this.destroyCalendar();
 		this.eventsSubscription.unsubscribe();
 		this.todaySubscription.unsubscribe();
+		this.filtersService.removeFilters();
 	}
 	
 	previousInterval()

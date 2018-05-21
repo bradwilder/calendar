@@ -13,7 +13,7 @@ import { MonthCalendarSubComponent } from './month-calendar-sub/month-calendar-s
 export class MonthCalendarComponent implements OnInit, OnDestroy
 {
 	componentRef: ComponentRef<MonthCalendarSubComponent>;
-	@ViewChild("cal", { read: ViewContainerRef }) container;
+	@ViewChild("dummy", { read: ViewContainerRef }) container;
 	
 	constructor(private calendarModel: CalendarBaseModel, private resolver: ComponentFactoryResolver) {}
 	

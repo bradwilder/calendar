@@ -1,0 +1,20 @@
+.cal-year {
+	height: 100%;
+	
+	&__container {
+		display: flex;
+		flex-flow: column;
+		height: 100%;
+	}
+	
+	&__row {
+		flex: 0 1 auto;
+		overflow-y: auto;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+	&__title {
+		text-align: center;
+	}
+}

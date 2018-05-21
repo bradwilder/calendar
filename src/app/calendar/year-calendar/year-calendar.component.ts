@@ -7,13 +7,14 @@ import { YearCalendarSubComponent } from './year-calendar-sub/year-calendar-sub.
 ({
 	selector: 'app-year-calendar',
 	templateUrl: './year-calendar.component.html',
+	styleUrls: ['./year-calendar.component.scss'],
 	providers: [CalendarBaseModel],
 	encapsulation: ViewEncapsulation.None
 })
 export class YearCalendarComponent implements OnInit, OnDestroy
 {
 	componentRef: ComponentRef<YearCalendarSubComponent>;
-	@ViewChild("cal", { read: ViewContainerRef }) container;
+	@ViewChild("dummy", { read: ViewContainerRef }) container;
 	
 	constructor(private calendarModel: CalendarBaseModel, private resolver: ComponentFactoryResolver) {}
 	

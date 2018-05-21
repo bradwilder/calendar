@@ -1,12 +1,7 @@
-<div class='cal cal-year'>
-	<div class="cal-year__container">
-		<app-calendar-controls [title]="year" [calendarModel]="calendarModel"></app-calendar-controls>
-		<div class="row cal-year__row">
-			<div *ngFor="let month of months" class="clndr-block col-lg-4 col-sm-6">
-				<div class="cal-year__title type__desc type__desc--emphasis">{{ month.month.format("MMMM") }}</div>
-				<app-calendar-table [daysOfTheWeek]="daysOfTheWeek" [weeks]="month.weeks" [calendarModel]="calendarModel"></app-calendar-table>
-			</div>
-		</div>
-		<app-filters></app-filters>
+<app-calendar-controls [title]="year" [calendarModel]="calendarModel"></app-calendar-controls>
+<div class="row cal-year__row">
+	<div *ngFor="let month of months" class="clndr-block col-lg-4 col-sm-6">
+		<div class="cal-year__title type__desc type__desc--emphasis">{{ month.month.format("MMMM") }}</div>
+		<app-calendar-table [daysOfTheWeek]="daysOfTheWeek" [weeks]="month.weeks" [calendarModel]="calendarModel"></app-calendar-table>
 	</div>
 </div>
