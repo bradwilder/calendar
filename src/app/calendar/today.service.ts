@@ -1,15 +1,17 @@
 import { Subject } from "rxjs/Subject";
+import { OnDestroy } from "@angular/core";
 
-export class TodayService
+export class TodayService implements OnDestroy
 {
 	today: Date;
 	todayChanged = new Subject<void>();
+	interval: number;
 	
 	constructor()
 	{
 		this.today = new Date();
 		
-		window.setInterval(() =>
+		this.interval = window.setInterval(() =>
 		{
 			this.checkDate();
 		}, 10000);
@@ -24,5 +26,10 @@ export class TodayService
 			this.today = now;
 			this.todayChanged.next();
 		}
+	}
+	
+	ngOnDestroy()
+	{
+		window.clearInterval(this.interval);
 	}
 }
