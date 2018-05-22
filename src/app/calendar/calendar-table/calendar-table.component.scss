@@ -112,11 +112,11 @@
 		height: 55px !important;
 	}
 	
-	&__icons {
-		text-align: center;
-	}
-	
 	&__icon {
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translate(-50%);
 		height: .4em !important;
 		width: .4em !important;
 	}
