@@ -49,23 +49,26 @@ export class CalendarService implements OnDestroy
 	
 	addEvent(event: Event)
 	{
-		this.dataService.addEvent(event).subscribe(null);
-		
-		this.updateEvents();
+		this.dataService.addEvent(event).subscribe(() =>
+		{
+			this.updateEvents();
+		}));
 	}
 	
 	updateEvent(event: Event)
 	{
-		this.dataService.updateEvent(event).subscribe(null);
-		
-		this.updateEvents();
+		this.dataService.updateEvent(event).subscribe(() =>
+		{
+			this.updateEvents();
+		});
 	}
 	
 	deleteEvent(event: Event)
 	{
-		this.dataService.deleteEvent(event).subscribe(null);
-		
-		this.updateEvents();
+		this.dataService.deleteEvent(event).subscribe(() =>
+		{
+			this.updateEvents();
+		});
 	}
 	
 	getEventTypes()
@@ -88,9 +91,10 @@ export class CalendarService implements OnDestroy
 	
 	updateEventType(eventType: EventType)
 	{
-		this.dataService.updateEventType(eventType).subscribe(null);
-		
-		this.updateEvents();
+		this.dataService.updateEventType(eventType).subscribe(() =>
+		{
+			this.updateEvents();
+		});
 	}
 	
 	canDeleteEventType(eventType: EventType)
