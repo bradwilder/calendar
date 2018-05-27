@@ -22,7 +22,7 @@ export class CalendarBaseModel
 	};
 	mode: CalendarViewType;
 	
-	constructor(public calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService) {}
+	constructor(private calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService) {}
 	
 	init(mode: CalendarViewType)
 	{
