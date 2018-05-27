@@ -1,11 +1,11 @@
 <div class="filter">
 	<span class="filter-desc">Desc</span>
 	<span class="filter-text">
-		<app-textbox [text]="selectedValue" [enabled]="filtersEnabled && enabled" [size]="30" (changed)="onInput($event)"></app-textbox>
+		<app-textbox [(text)]="selectedValue" [enabled]="filtersEnabled && enabled" [size]="30" (textChange)="onInput()"></app-textbox>
 	</span>
 	<span class="filter-btns">
 		<span class="filter-toggle">
-			<app-toggle-switch [on]="enabled" (changed)="onEnable($event)" [enabled]="filtersEnabled"></app-toggle-switch>
+			<app-toggle-switch [(on)]="enabled" (onChange)="onEnable()" [enabled]="filtersEnabled"></app-toggle-switch>
 		</span>
 		<button class="filter-btn" [disabled]="!filtersEnabled" (click)="onClear()"><i class="fa fa-close"></i></button>
 	</span>

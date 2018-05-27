@@ -33,10 +33,8 @@ export class DescriptionFilterComponent implements OnInit, OnDestroy
 		});
 	}
 	
-	onInput(text: string)
+	onInput()
 	{
-		this.selectedValue = text;
-		
 		this.clearTimeout();
 		
 		this.inputTimeout = window.setTimeout(() =>
@@ -57,10 +55,8 @@ export class DescriptionFilterComponent implements OnInit, OnDestroy
 		}
 	}
 	
-	onEnable(enable: boolean)
+	onEnable()
 	{
-		this.enabled = enable;
-		
 		if (this.enabled)
 		{
 			if (this.selectedValue)
@@ -78,7 +74,8 @@ export class DescriptionFilterComponent implements OnInit, OnDestroy
 	onClear()
 	{
 		this.selectedValue = '';
-		this.onEnable(false);
+		this.enabled = false;
+		this.onEnable();
 	}
 	
 	filterFunction(event: Event)

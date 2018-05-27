@@ -33,10 +33,8 @@ export class NameFilterComponent implements OnInit, OnDestroy
 		});
 	}
 	
-	onInput(text: string)
+	onInput()
 	{
-		this.selectedName = text;
-		
 		this.clearTimeout();
 		
 		this.inputTimeout = window.setTimeout(() =>
@@ -57,10 +55,8 @@ export class NameFilterComponent implements OnInit, OnDestroy
 		}
 	}
 	
-	onEnable(enable: boolean)
+	onEnable()
 	{
-		this.enabled = enable;
-		
 		if (this.enabled)
 		{
 			if (this.selectedName)
@@ -78,7 +74,8 @@ export class NameFilterComponent implements OnInit, OnDestroy
 	onClear()
 	{
 		this.selectedName = '';
-		this.onEnable(false);
+		this.enabled = false;
+		this.onEnable();
 	}
 	
 	filterFunction(event: Event)

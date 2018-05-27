@@ -25,9 +25,8 @@ export class FiltersComponent implements OnInit
 		});
 	}
 	
-	onEnable(enable)
+	onEnable()
 	{
-		this.enabled = enable;
 		this.filtersService.setEnabled(this.enabled);
 	}
 	

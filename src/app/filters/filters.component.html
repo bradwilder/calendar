@@ -3,7 +3,7 @@
 		<span class="filter-summary-desc">Showing {{ filteredEventCount }} events</span>
 		<span class="filter-btns">
 			<span class="filter-header-item filter-toggle">
-				<app-toggle-switch [on]="enabled" (changed)="onEnable($event)"></app-toggle-switch>
+				<app-toggle-switch [(on)]="enabled" (onChange)="onEnable()"></app-toggle-switch>
 			</span>
 			<button class="filter-header-item filter-btn" (click)="open = !open"><i class="fa" [ngClass]="{'fa-angle-up': !open, 'fa-angle-down': open}"></i></button>
 			<button class="filter-header-item filter-btn" (click)="onClear()"><i class="fa fa-close"></i></button>

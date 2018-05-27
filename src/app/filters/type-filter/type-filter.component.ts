@@ -54,10 +54,8 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 		}
 	}
 	
-	onEnable(enable: boolean)
+	onEnable()
 	{
-		this.enabled = enable;
-		
 		if (this.enabled)
 		{
 			if (this.selectedType)
@@ -74,7 +72,8 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 	onClear()
 	{
 		this.selectedType = TypeFilterComponent.emptyEventType._id;
-		this.onEnable(false);
+		this.enabled = false;
+		this.onEnable();
 	}
 	
 	filterFunction(event: Event)
