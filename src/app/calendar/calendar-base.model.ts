@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { CalendarViewType } from "./calendar-view-type.enum";
 import { Event } from '../shared/event.model';
 import { FiltersService } from "../filters/filters.service";
+import { TodayService } from "./today.service";
 
 declare var $: any;
 
@@ -21,7 +22,7 @@ export class CalendarBaseModel
 	};
 	mode: CalendarViewType;
 	
-	constructor(public calendarService: CalendarService, private filtersService: FiltersService) {}
+	constructor(public calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService) {}
 	
 	init(mode: CalendarViewType)
 	{
@@ -37,7 +38,7 @@ export class CalendarBaseModel
 			}
 		});
 		
-		this.todaySubscription = this.calendarService.todayService.todayChanged.subscribe(this.mode === CalendarViewType.Month ? this.createMonthCalendar.bind(this) : this.createYearCalendar.bind(this));
+		this.todaySubscription = this.todayService.todayChanged.subscribe(this.mode === CalendarViewType.Month ? this.createMonthCalendar.bind(this) : this.createYearCalendar.bind(this));
 		
 		this.mode === CalendarViewType.Month ? this.createMonthCalendar() : this.createYearCalendar();
 	}
@@ -75,7 +76,7 @@ export class CalendarBaseModel
 	{
 		this.destroyCalendar();
 		
-		this.options['startWithMonth'] = this.calendarService.todayService.today.getFullYear() + "-01-01";
+		this.options['startWithMonth'] = this.todayService.today.getFullYear() + "-01-01";
 		
 		this.clndr = $('#cal').clndr(this.options);
 		

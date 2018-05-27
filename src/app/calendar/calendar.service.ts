@@ -18,7 +18,7 @@ export class CalendarService implements OnDestroy
 	currYear: number;
 	filtersSubscription: Subscription;
 	
-	constructor(private dataService: DataService, private filtersService: FiltersService, public todayService: TodayService)
+	constructor(private dataService: DataService, private filtersService: FiltersService, private todayService: TodayService)
 	{
 		this.currYear = this.todayService.today.getFullYear();
 		this.currMonth = this.todayService.today.getMonth();
