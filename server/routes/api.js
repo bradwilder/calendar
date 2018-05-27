@@ -199,11 +199,9 @@ router.post('/addEventType', (req, res) =>
 {
 	connection((db) =>
 	{
-		console.log(req.body._id);
 		db.collection('eventTypes').count({$or: [{_id: req.body._id}, {name: req.body.name}]})
 			.then((count) =>
 			{
-				console.log(count);
 				if (count === 0)
 				{
 					if (req.body.iconFileStr)
