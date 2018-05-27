@@ -1,6 +1,6 @@
 <div class="filters type__title">
 	<div class="filter-summary">
-		<span class="filter-summary-desc">Showing {{ filteredEventCount }} events</span>
+		<span class="filter-summary-desc">Showing {{ filteredEventCount }} event{{ filteredEventCount === 1 ? '' : 's' }}</span>
 		<span class="filter-btns">
 			<span class="filter-header-item filter-toggle">
 				<app-toggle-switch [(on)]="enabled" (onChange)="onEnable()"></app-toggle-switch>
