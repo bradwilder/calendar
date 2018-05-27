@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { FiltersService } from '../filters.service';
-import { CalendarService } from '../../calendar/calendar.service';
 import { Event } from '../../shared/event.model';
 
 @Component
@@ -19,7 +18,7 @@ export class NameFilterComponent implements OnInit, OnDestroy
 	clearedSubscription: Subscription;
 	inputTimeout: number;
 	
-	constructor(private filtersService: FiltersService, private calendarService: CalendarService) {}
+	constructor(private filtersService: FiltersService) {}
 	
 	ngOnInit()
 	{
