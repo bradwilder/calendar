@@ -27,9 +27,7 @@ export class CalendarBaseModel
 	{
 		this.mode = mode;
 		
-		this.options['events'] = this.calendarService.getEvents();
-		
-		this.eventsSubscription = this.calendarService.eventsChanged.subscribe((events: Event[]) =>
+		this.eventsSubscription = this.calendarService.filteredEventsChanged.subscribe((events: Event[]) =>
 		{
 			this.options['events'] = events;
 			

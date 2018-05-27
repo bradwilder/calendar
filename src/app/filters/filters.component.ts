@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { CalendarService } from '../calendar/calendar.service';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FiltersService } from './filters.service';
+import { CalendarService } from '../calendar/calendar.service';
 
 @Component
 ({
@@ -9,12 +9,21 @@ import { FiltersService } from './filters.service';
 	styleUrls: ['./filters.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })
-export class FiltersComponent
+export class FiltersComponent implements OnInit
 {
 	enabled = false;
 	open = false;
+	filteredEventCount = 0;
 	
-	constructor(private calendarService: CalendarService, private filtersService: FiltersService) {}
+	constructor(private filtersService: FiltersService, private calendarService: CalendarService) {}
+	
+	ngOnInit()
+	{
+		this.calendarService.filteredCountChanged.subscribe((count) =>
+		{
+			this.filteredEventCount = count;
+		});
+	}
 	
 	onEnable(enable)
 	{

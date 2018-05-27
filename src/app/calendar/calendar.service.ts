@@ -11,7 +11,9 @@ import { Subscription } from "rxjs/Subscription";
 export class CalendarService implements OnDestroy
 {
 	private events: Event[] = [];
-	eventsChanged = new Subject<Event[]>();
+	private filteredEvents: Event[] = [];
+	filteredEventsChanged = new Subject<Event[]>();
+	filteredCountChanged = new Subject<number>();
 	currMonth: number;
 	currYear: number;
 	filtersSubscription: Subscription;
@@ -20,46 +22,44 @@ export class CalendarService implements OnDestroy
 	{
 		this.currYear = this.todayService.today.getFullYear();
 		this.currMonth = this.todayService.today.getMonth();
-		this.updateEvents();
+		this.getEvents();
 		
 		this.filtersSubscription = this.filtersService.filtersChanged.subscribe(() =>
 		{
-			this.eventsChanged.next(this.getEvents());
+			this.updateFilteredEvents();
 		});
 	}
 	
-	getEvents()
-	{
-		return this.filtersService.filter(this.events);
-	}
-	
-	getEventsCount()
-	{
-		return this.filtersService.filter(this.events).length;
-	}
-	
-	private updateEvents()
+	private getEvents()
 	{
 		this.dataService.getEvents().subscribe((res) => 
 		{
 			this.events = res;
-			this.eventsChanged.next(this.getEvents());
+			this.updateFilteredEvents();
 		});
+	}
+	
+	private updateFilteredEvents()
+	{
+		this.filteredEvents = this.filtersService.filter(this.events);
+		this.filteredEventsChanged.next(this.filteredEvents);
+		this.filteredCountChanged.next(this.filteredEvents.length);
 	}
 	
 	addEvent(event: Event)
 	{
 		this.dataService.addEvent(event).subscribe(() =>
 		{
-			this.updateEvents();
-		}));
+			this.events.push(event);
+			this.updateFilteredEvents();
+		});
 	}
 	
 	updateEvent(event: Event)
 	{
 		this.dataService.updateEvent(event).subscribe(() =>
 		{
-			this.updateEvents();
+			this.updateFilteredEvents();
 		});
 	}
 	
@@ -67,7 +67,9 @@ export class CalendarService implements OnDestroy
 	{
 		this.dataService.deleteEvent(event).subscribe(() =>
 		{
-			this.updateEvents();
+			const index = this.events.indexOf(event);
+			this.events.splice(index, 1);
+			this.updateFilteredEvents();
 		});
 	}
 	
@@ -93,7 +95,7 @@ export class CalendarService implements OnDestroy
 	{
 		this.dataService.updateEventType(eventType).subscribe(() =>
 		{
-			this.updateEvents();
+			this.getEvents();
 		});
 	}
 	
