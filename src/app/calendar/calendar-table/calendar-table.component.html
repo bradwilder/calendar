@@ -9,7 +9,7 @@
 			<td *ngFor="let day of weeks[i]" class="{{ day.classes }}" [ngClass]="{selected: selectedDay && day.classes.indexOf(selectedDay) != -1}" (click)="onDayClicked(day)">
 				<div class="day-contents">{{ day.day }}</div>
 				<div *ngIf="day.events.length > 0" class="day-icons" [ngClass]="{'cal-year__icons': isYearView()}">
-					<img *ngIf="isYearView(); else monthViewIcons" class="day-icon cal-year__icon" src="/assets/event-type-icons/circle.svg">
+					<img *ngIf="isYearView(); else monthViewIcons" class="day-icon cal-year__icon" src="/assets/circle.svg">
 					<ng-template #monthViewIcons>
 						<span *ngFor="let event of day.events" class="day-icon-container">
 							<app-edit-event-modal [event]="event">
