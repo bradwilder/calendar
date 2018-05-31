@@ -1,0 +1,20 @@
+{
+  "name": "calendar2.0",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Brad <bradwilder31415@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "clndr": "^1.4.7"
+  }
+}
