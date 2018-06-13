@@ -13,6 +13,7 @@
 	box-sizing: border-box;
 	vertical-align: bottom;
 	margin: 0;
+	overflow: hidden;
 	
 	&:hover:not([data-disabled="true"]) {
 		border-color: $text-color-light;
@@ -24,7 +25,9 @@
 	}
 	
 	&__input {
-		display: none;
+		position: absolute;
+		top: -3em;
+		right: -3em;
 	}
 	
 	&__slider {
