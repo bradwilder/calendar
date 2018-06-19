@@ -18,32 +18,24 @@ export class FiltersService
 	
 	addFilter(filterName: string, filter: Function)
 	{
-		this.removeFilter(filterName);
+		delete this.filters[name];
 		this.filters[filterName] = filter;
-		
 		this.filtersChanged.next();
 	}
 	
 	removeFilter(name: string)
 	{
 		delete this.filters[name];
-		
 		this.filtersChanged.next();
 	}
 	
 	clear()
 	{
-		this.removeFilters();
+		this.filters = {};
+		this.filtersChanged.next();
 		this.enabled = false;
 		this.enabledChanged.next(this.enabled);
 		this.cleared.next();
-	}
-	
-	private removeFilters()
-	{
-		this.filters = {};
-		
-		this.filtersChanged.next();
 	}
 	
 	filter(events: Event[]): Event[]
