@@ -6,7 +6,7 @@ Calendar is a simple web calendar application with a monthly or yearly view and 
 
 * Monthly or yearly view
 * Create custom event types
-* Filter by event type, name, or description
+* Filter events by type, name, or description
 
 ## Development server
 
