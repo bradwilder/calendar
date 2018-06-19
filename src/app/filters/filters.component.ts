@@ -19,6 +19,8 @@ export class FiltersComponent implements OnInit
 	
 	ngOnInit()
 	{
+		this.filteredEventCount = this.calendarService.getFilteredEventCount();
+		
 		this.calendarService.filteredCountChanged.subscribe((count) =>
 		{
 			this.filteredEventCount = count;

@@ -51,6 +51,11 @@ export class CalendarService implements OnDestroy
 		return this.filteredEvents;
 	}
 	
+	getFilteredEventCount()
+	{
+		return this.filteredEvents.length;
+	}
+	
 	addEvent(event: Event)
 	{
 		this.dataService.addEvent(event).subscribe(() =>
