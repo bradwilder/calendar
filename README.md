@@ -2,6 +2,12 @@
 
 Calendar is a simple web calendar application with a monthly or yearly view and event tracking.
 
+## Features
+
+* Monthly or yearly view
+* Create custom event types
+* Filter by event type, name, or description
+
 ## Development server
 
 Run `gulp server` to start the app and database servers. You can then navigate to `http://localhost:3007/` if you don't wish to use a dev server.
