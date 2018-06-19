@@ -50,7 +50,6 @@ export class CalendarBaseModel
 		this.destroyCalendar();
 		this.eventsSubscription.unsubscribe();
 		this.todaySubscription.unsubscribe();
-		this.filtersService.clear();
 	}
 	
 	previousInterval()
