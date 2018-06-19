@@ -27,3 +27,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Built With
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/bradwilder/calendar/blob/master/LICENSE) file for details
