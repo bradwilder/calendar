@@ -8,6 +8,37 @@ Calendar is a simple web calendar application with a monthly or yearly view and 
 * Create custom event types
 * Filter events by type, name, or description
 
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+* [npm](https://www.npmjs.com/)
+* [Bower](https://bower.io/)
+
+### Installing
+
+1. Clone the repository from GitHub:
+```
+git clone git://github.com/bradwilder/calendar.git
+```
+
+2. Navigate into the cloned repository directory:
+```
+cd calendar
+```
+
+3. Install the npm dependencies:
+```
+npm install
+```
+
+4. Install the bower dependencies:
+```
+bower install
+```
+
 ## Development server
 
 Run `gulp server` to start the app and database servers. You can then navigate to `http://localhost:3007/` if you don't wish to use a dev server.
