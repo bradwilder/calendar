@@ -4,17 +4,19 @@ const ObjectID = require('mongodb').ObjectID;
 const fs = require('fs');
 const path = require('path');
 
+const database = 'calendar';
+
 // Connect
 const connection = (closure) =>
 {
-	return MongoClient.connect('mongodb://localhost:27017/calendar', (err, client) =>
+	return MongoClient.connect('mongodb://localhost:27017/' + database, (err, client) =>
 	{
 		if (err)
 		{
 			return console.log(err);
 		}
 		
-		let db = client.db('calendar');
+		let db = client.db(database);
 		closure(db);
 	});
 };
