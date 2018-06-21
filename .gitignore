@@ -43,6 +43,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Event type icons
-/src/assets/event-type-icons/*
