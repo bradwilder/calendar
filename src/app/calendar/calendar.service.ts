@@ -17,12 +17,15 @@ export class CalendarService implements OnDestroy
 	currMonth: number;
 	currYear: number;
 	filtersSubscription: Subscription;
+	private eventTypes: EventType[] = [];
+	eventTypesChanged = new Subject<EventType[]>();
 	
 	constructor(private dataService: DataService, private filtersService: FiltersService, private todayService: TodayService)
 	{
 		this.currYear = this.todayService.today.getFullYear();
 		this.currMonth = this.todayService.today.getMonth();
 		this.getEvents();
+		this.getEventTypes();
 		
 		this.filtersSubscription = this.filtersService.filtersChanged.subscribe(() =>
 		{
@@ -83,9 +86,13 @@ export class CalendarService implements OnDestroy
 		});
 	}
 	
-	getEventTypes()
+	private getEventTypes()
 	{
-		return this.dataService.getEventTypes();
+		this.dataService.getEventTypes().subscribe((res) => 
+		{
+			this.eventTypes = res;
+			this.eventTypesChanged.next(this.eventTypes);
+		});
 	}
 	
 	addEventType(eventType: EventType)
@@ -93,10 +100,14 @@ export class CalendarService implements OnDestroy
 		this.dataService.addEventType(eventType).subscribe(null, (response) =>
 		{
 			var message = response.json().message;
-			
 			if (message)
 			{
 				alert('Error: ' +  message);
+			}
+			else
+			{
+				this.eventTypes.push(eventType);
+				this.eventTypesChanged.next(this.eventTypes);
 			}
 		});
 	}

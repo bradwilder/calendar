@@ -18,7 +18,7 @@ export class AddEventComponent implements OnInit
 	
 	ngOnInit()
 	{
-		this.calendarService.getEventTypes().subscribe((res) => 
+		this.calendarService.eventTypesChanged.subscribe((res) => 
 		{
 			this.eventTypes = res;
 		});

@@ -25,7 +25,7 @@ export class TypeFilterComponent implements OnInit, OnDestroy
 	
 	ngOnInit()
 	{
-		this.calendarService.getEventTypes().subscribe((res) => 
+		this.calendarService.eventTypesChanged.subscribe((res) => 
 		{
 			this.eventTypes = res;
 			this.eventTypes.unshift(TypeFilterComponent.emptyEventType);
