@@ -77,7 +77,7 @@ export class CalendarBaseModel
 	{
 		this.destroyCalendar();
 		
-		this.options['startWithMonth'] = this.todayService.today.getFullYear() + "-01-01";
+		this.options['startWithMonth'] = this.todayService.getToday().getFullYear() + "-01-01";
 		
 		this.clndr = $('#cal').clndr(this.options);
 		

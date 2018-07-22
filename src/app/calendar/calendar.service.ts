@@ -22,8 +22,9 @@ export class CalendarService implements OnDestroy
 	
 	constructor(private dataService: DataService, private filtersService: FiltersService, private todayService: TodayService)
 	{
-		this.selectedYear = this.todayService.today.getFullYear();
-		this.selectedMonth = this.todayService.today.getMonth();
+		let today = this.todayService.getToday();
+		this.selectedYear = today.getFullYear();
+		this.selectedMonth = today.getMonth();
 		this.getEvents();
 		this.getEventTypes();
 		
@@ -132,12 +133,13 @@ export class CalendarService implements OnDestroy
 	
 	hasDifferingSelectedYear()
 	{
-		return this.selectedYear != this.todayService.today.getFullYear();
+		return this.selectedYear != this.todayService.getToday().getFullYear();
 	}
 	
 	hasDifferingSelectedMonth()
 	{
-		return this.selectedYear != this.todayService.today.getFullYear() || this.selectedMonth != this.todayService.today.getMonth();
+		let today = this.todayService.getToday();
+		return this.selectedYear != today.getFullYear() || this.selectedMonth != today.getMonth();
 	}
 	
 	ngOnDestroy()

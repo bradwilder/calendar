@@ -3,14 +3,14 @@ import { OnDestroy } from "@angular/core";
 
 export class TodayService implements OnDestroy
 {
-	today: Date;
+	private today: Date;
 	todayChanged = new Subject<Date>();
 	private checkDateInterval: number;
 	
 	constructor()
 	{
 		this.today = new Date();
-		this.todayChanged.next(this.today);
+		this.todayChanged.next(new Date(this.today.getTime()));
 		
 		this.checkDateInterval = window.setInterval(() =>
 		{
@@ -27,6 +27,11 @@ export class TodayService implements OnDestroy
 			this.today = now;
 			this.todayChanged.next(this.today);
 		}
+	}
+	
+	public getToday() : Date
+	{
+		return new Date(this.today.getTime());
 	}
 	
 	ngOnDestroy()
