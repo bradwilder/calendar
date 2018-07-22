@@ -29,6 +29,7 @@ import { NameFilterComponent } from './filters/name-filter/name-filter.component
 import { DescriptionFilterComponent } from './filters/description-filter/description-filter.component';
 import { ToggleSwitchComponent } from './inputs/toggle-switch/toggle-switch.component';
 import { TextboxComponent } from './inputs/textbox/textbox.component';
+import { SelectedDateService } from './calendar/selectedDate.service';
 
 @NgModule
 ({
@@ -72,6 +73,7 @@ import { TextboxComponent } from './inputs/textbox/textbox.component';
 		DataService,
 		CalendarService,
 		TodayService,
+		SelectedDateService,
 		FiltersService
 	],
 	bootstrap: [AppComponent],

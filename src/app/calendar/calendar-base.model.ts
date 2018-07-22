@@ -5,6 +5,7 @@ import { CalendarViewType } from "./calendar-view-type.enum";
 import { Event } from '../shared/event.model';
 import { FiltersService } from "../filters/filters.service";
 import { TodayService } from "./today.service";
+import { SelectedDateService } from "./selectedDate.service";
 
 declare var $: any;
 
@@ -22,7 +23,7 @@ export class CalendarBaseModel
 	};
 	mode: CalendarViewType;
 	
-	constructor(private calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService) {}
+	constructor(private calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService, private selectedDateService: SelectedDateService) {}
 	
 	init(mode: CalendarViewType)
 	{
@@ -64,13 +65,13 @@ export class CalendarBaseModel
 	
 	changeMonth(month)
 	{
-		this.calendarService.selectedMonth = month.month();
-		this.calendarService.selectedYear = month.year();
+		this.selectedDateService.selectedMonth = month.month();
+		this.selectedDateService.selectedYear = month.year();
 	}
 	
 	changeInterval(start, end)
 	{
-		this.calendarService.selectedYear = start.year();
+		this.selectedDateService.selectedYear = start.year();
 	}
 	
 	private createYearCalendar()
@@ -81,9 +82,9 @@ export class CalendarBaseModel
 		
 		this.clndr = $('#cal').clndr(this.options);
 		
-		if (this.calendarService.hasDifferingSelectedYear())
+		if (this.selectedDateService.hasDifferingSelectedYear())
 		{
-			this.clndr.setYear(this.calendarService.selectedYear);
+			this.clndr.setYear(this.selectedDateService.selectedYear);
 		}
 	}
 	
@@ -93,10 +94,10 @@ export class CalendarBaseModel
 		
 		this.clndr = $('#cal').clndr(this.options);
 		
-		if (this.calendarService.hasDifferingSelectedMonth())
+		if (this.selectedDateService.hasDifferingSelectedMonth())
 		{
-			this.clndr.setYear(this.calendarService.selectedYear);
-			this.clndr.setMonth(this.calendarService.selectedMonth);
+			this.clndr.setYear(this.selectedDateService.selectedYear);
+			this.clndr.setMonth(this.selectedDateService.selectedMonth);
 		}
 	}
 	

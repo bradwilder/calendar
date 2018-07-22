@@ -4,7 +4,6 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { Event } from '../shared/event.model';
 import { EventType } from "../shared/event-type.model";
 import { FiltersService } from "../filters/filters.service";
-import { TodayService } from "./today.service";
 import { Subscription } from "rxjs/Subscription";
 
 @Injectable()
@@ -14,17 +13,12 @@ export class CalendarService implements OnDestroy
 	private filteredEvents: Event[] = [];
 	filteredEventsChanged = new Subject<Event[]>();
 	filteredCountChanged = new Subject<number>();
-	selectedMonth: number;
-	selectedYear: number;
 	filtersSubscription: Subscription;
 	private eventTypes: EventType[] = [];
 	eventTypesChanged = new Subject<EventType[]>();
 	
-	constructor(private dataService: DataService, private filtersService: FiltersService, private todayService: TodayService)
+	constructor(private dataService: DataService, private filtersService: FiltersService)
 	{
-		let today = this.todayService.getToday();
-		this.selectedYear = today.getFullYear();
-		this.selectedMonth = today.getMonth();
 		this.getEvents();
 		this.getEventTypes();
 		
@@ -129,17 +123,6 @@ export class CalendarService implements OnDestroy
 	deleteEventType(eventType: EventType)
 	{
 		this.dataService.deleteEventType(eventType).subscribe(null);
-	}
-	
-	hasDifferingSelectedYear()
-	{
-		return this.selectedYear != this.todayService.getToday().getFullYear();
-	}
-	
-	hasDifferingSelectedMonth()
-	{
-		let today = this.todayService.getToday();
-		return this.selectedYear != today.getFullYear() || this.selectedMonth != today.getMonth();
 	}
 	
 	ngOnDestroy()
