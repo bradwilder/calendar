@@ -1,6 +1,6 @@
 # Calendar
 
-Calendar is a simple web calendar application with a monthly or yearly view and event tracking.
+Calendar is a web calendar application with a monthly or yearly view and simple event tracking.
 
 ## Features
 
