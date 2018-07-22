@@ -14,14 +14,14 @@ export class CalendarBaseModel
 {
 	eventsSubscription: Subscription;
 	todaySubscription: Subscription;
-	clndr;
-	options: Object =
+	private clndr;
+	private options: Object =
 	{
 		daysOfTheWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 		trackSelectedDate: true,
 		events: []
 	};
-	mode: CalendarViewType;
+	private mode: CalendarViewType;
 	
 	constructor(private calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService, private selectedDateService: SelectedDateService) {}
 	

@@ -13,7 +13,7 @@ export class CalendarService implements OnDestroy
 	private filteredEvents: Event[] = [];
 	filteredEventsChanged = new Subject<Event[]>();
 	filteredCountChanged = new Subject<number>();
-	filtersSubscription: Subscription;
+	private filtersSubscription: Subscription;
 	private eventTypes: EventType[] = [];
 	eventTypesChanged = new Subject<EventType[]>();
 	
