@@ -42,9 +42,11 @@ bower install
 
 ## Development server
 
-Run `gulp server` to start the app and database servers. You can then navigate to `http://localhost:3007/` if you don't wish to use a dev server.
+1. Run `gulp server` to start the app and database servers.
 
-Run `gulp ngWatch` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2. Run `gulp ngWatch` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+Note: If you don't wish to use a dev server, you can skip step 2 and instead navigate to `http://localhost:3007/`.
 
 ## Build
 
