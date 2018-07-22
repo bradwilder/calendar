@@ -5,14 +5,14 @@ export class TodayService implements OnDestroy
 {
 	today: Date;
 	todayChanged = new Subject<Date>();
-	interval: number;
+	private checkDateInterval: number;
 	
 	constructor()
 	{
 		this.today = new Date();
 		this.todayChanged.next(this.today);
 		
-		this.interval = window.setInterval(() =>
+		this.checkDateInterval = window.setInterval(() =>
 		{
 			this.checkDate();
 		}, 10000);
@@ -31,6 +31,6 @@ export class TodayService implements OnDestroy
 	
 	ngOnDestroy()
 	{
-		window.clearInterval(this.interval);
+		window.clearInterval(this.checkDateInterval);
 	}
 }

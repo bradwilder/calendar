@@ -64,13 +64,13 @@ export class CalendarBaseModel
 	
 	changeMonth(month)
 	{
-		this.calendarService.currMonth = month.month();
-		this.calendarService.currYear = month.year();
+		this.calendarService.selectedMonth = month.month();
+		this.calendarService.selectedYear = month.year();
 	}
 	
 	changeInterval(start, end)
 	{
-		this.calendarService.currYear = start.year();
+		this.calendarService.selectedYear = start.year();
 	}
 	
 	private createYearCalendar()
@@ -81,9 +81,9 @@ export class CalendarBaseModel
 		
 		this.clndr = $('#cal').clndr(this.options);
 		
-		if (this.calendarService.hasDifferingCurrentYear())
+		if (this.calendarService.hasDifferingSelectedYear())
 		{
-			this.clndr.setYear(this.calendarService.currYear);
+			this.clndr.setYear(this.calendarService.selectedYear);
 		}
 	}
 	
@@ -93,10 +93,10 @@ export class CalendarBaseModel
 		
 		this.clndr = $('#cal').clndr(this.options);
 		
-		if (this.calendarService.hasDifferingCurrentMonth())
+		if (this.calendarService.hasDifferingSelectedMonth())
 		{
-			this.clndr.setYear(this.calendarService.currYear);
-			this.clndr.setMonth(this.calendarService.currMonth);
+			this.clndr.setYear(this.calendarService.selectedYear);
+			this.clndr.setMonth(this.calendarService.selectedMonth);
 		}
 	}
 	

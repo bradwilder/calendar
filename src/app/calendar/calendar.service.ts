@@ -14,16 +14,16 @@ export class CalendarService implements OnDestroy
 	private filteredEvents: Event[] = [];
 	filteredEventsChanged = new Subject<Event[]>();
 	filteredCountChanged = new Subject<number>();
-	currMonth: number;
-	currYear: number;
+	selectedMonth: number;
+	selectedYear: number;
 	filtersSubscription: Subscription;
 	private eventTypes: EventType[] = [];
 	eventTypesChanged = new Subject<EventType[]>();
 	
 	constructor(private dataService: DataService, private filtersService: FiltersService, private todayService: TodayService)
 	{
-		this.currYear = this.todayService.today.getFullYear();
-		this.currMonth = this.todayService.today.getMonth();
+		this.selectedYear = this.todayService.today.getFullYear();
+		this.selectedMonth = this.todayService.today.getMonth();
 		this.getEvents();
 		this.getEventTypes();
 		
@@ -130,14 +130,14 @@ export class CalendarService implements OnDestroy
 		this.dataService.deleteEventType(eventType).subscribe(null);
 	}
 	
-	hasDifferingCurrentYear()
+	hasDifferingSelectedYear()
 	{
-		return this.currYear != this.todayService.today.getFullYear();
+		return this.selectedYear != this.todayService.today.getFullYear();
 	}
 	
-	hasDifferingCurrentMonth()
+	hasDifferingSelectedMonth()
 	{
-		return this.currYear != this.todayService.today.getFullYear() || this.currMonth != this.todayService.today.getMonth();
+		return this.selectedYear != this.todayService.today.getFullYear() || this.selectedMonth != this.todayService.today.getMonth();
 	}
 	
 	ngOnDestroy()
