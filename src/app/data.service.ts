@@ -11,7 +11,7 @@ export class DataService
 	constructor(private http: Http) {}
 	
 	getEvents(): Observable<Event[]>
-    {
+	{
 		return this.http.get("/api/events").map((result) =>
 		{
 			const eventsData = result.json().data;
@@ -40,7 +40,7 @@ export class DataService
 	}
 	
 	getEventTypes()
-    {
+	{
 		return this.http.get("/api/eventTypes").map((result) => result.json().data);
 	}
 	
