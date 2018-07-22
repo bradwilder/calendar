@@ -29,7 +29,7 @@ export class TodayService implements OnDestroy
 		}
 	}
 	
-	public getToday() : Date
+	getToday() : Date
 	{
 		return new Date(this.today.getTime());
 	}
