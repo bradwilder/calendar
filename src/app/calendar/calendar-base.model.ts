@@ -3,7 +3,6 @@ import { CalendarService } from "./calendar.service";
 import { Injectable } from "@angular/core";
 import { CalendarViewType } from "./calendar-view-type.enum";
 import { Event } from '../shared/event.model';
-import { FiltersService } from "../filters/filters.service";
 import { TodayService } from "./today.service";
 import { SelectedDateService } from "./selectedDate.service";
 
@@ -23,7 +22,7 @@ export class CalendarBaseModel
 	};
 	private mode: CalendarViewType;
 	
-	constructor(private calendarService: CalendarService, private filtersService: FiltersService, private todayService: TodayService, private selectedDateService: SelectedDateService) {}
+	constructor(private calendarService: CalendarService, private todayService: TodayService, private selectedDateService: SelectedDateService) {}
 	
 	init(mode: CalendarViewType)
 	{
