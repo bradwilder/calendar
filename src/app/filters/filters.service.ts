@@ -5,7 +5,7 @@ export class FiltersService
 {
 	private filters = {};
 	filtersChanged = new Subject<void>();
-	enabled = false;
+	private enabled = false;
 	enabledChanged = new Subject<boolean>();
 	cleared = new Subject<void>();
 	
